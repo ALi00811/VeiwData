@@ -25,7 +25,6 @@ namespace VeiwData
 
                     Model = new Model(){BinaryReader = br ,FileStream = sr, OpenFileDialog=ofd};
 
-                    //sr.Close();
                     OpenForms.access = true;
                 }
             }

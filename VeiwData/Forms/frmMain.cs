@@ -16,14 +16,17 @@ namespace VeiwData
     {
         Dataloading Da;
         SetChart setchart;
+        Resolotion resolotion;
         public int DisplayRange { get; set; }
-        public short[] DataDisplayRange { get; set; }
+        //public short[] DataDisplayRange { get; set; }
         public bool access = false;
+        public double IndexSpace { get; set; }
 
         public frmMain()
         {
             InitializeComponent();
             DisplayRange = 2;
+            resolotion = new Resolotion();
         }
 
         private void btnChoose_Click(object sender, EventArgs e)
@@ -47,8 +50,8 @@ namespace VeiwData
             var Result = OpenFile.Open();
             if (access)
             {
-                Da = new Dataloading(Result);
-                setchart = new SetChart(Da.Analize());
+                Da = new Dataloading(Result , resolotion);
+                setchart = new SetChart(Da.GetAllData());
 
                 lblNameFile.Text = Result.OpenFileDialog.FileName;
                 lblSizeData.Text = Result.FileStream.Length.ToString("#,0");
@@ -75,39 +78,22 @@ namespace VeiwData
         {
             if (rdless.Checked)
             {
-                DisplayRange = 10;
+                DisplayRange = 3;
             }
-        }
-
-        private void wfgAllData_CursorsChanged(object sender, CollectionChangeEventArgs e)
-        {
-           
-        }
-
-        private void wfgAllData_MouseClick(object sender, MouseEventArgs e)
-        {
-            //wfgAllData.Cursors.Add()
-        }
-
-        private void wfgAllData_CursorChanged(object sender, EventArgs e)
-        {
         }
 
         private void wfgAllData_PlotAreaMouseUp(object sender, MouseEventArgs e)
         {
             if (access)
             {
-                double xData, yData;
+                double xData, yData = 0;
                 Point p = new Point(e.X, e.Y);
-                wfgAllData.Plots[0].InverseMapDataPoint(wfgAllData.PlotAreaBounds, p, out xData, out yData);
+
+                wfgAllData.Plots[0].InverseMapDataPoint(wfgAllData.PlotAreaBounds, p, out xData,out yData);
                 wfgAllData.Cursors[0].XPosition = xData;
-                //txtFC.Text = UnitConverter.ParseDoubleData(xData);
-
-                DataDisplayRange = Da.Analize();
-                
-                //setChart setchart = new SetChart();
+                if (DisplayRange != 1) { IndexSpace = DisplayRange == 2 ? resolotion.Width * 0.1 : resolotion.Width * 0.5; }
+                setchart.DrawingIntendedData(xData, (int)IndexSpace, DisplayRange);
             }
-
         }
     }
 }

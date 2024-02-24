@@ -21,23 +21,21 @@ namespace VeiwData.Classes
         long step = 0;
         #endregion
 
-        public Dataloading(Model model)
+        public Dataloading(Model model, Resolotion resolotion)
         {
             BinaryReader = model.BinaryReader;
             FileStream = model.FileStream;
             OpenFileDialog = model.OpenFileDialog;
 
-            Resolotion resolotion = new Resolotion();
             dataLength = resolotion.Width * 2;
 
             fileLength = new FileInfo(OpenFileDialog.FileName).Length;
             step = fileLength / dataLength;
 
-            Analize();
-            //FileStream.Close();
+            GetAllData();
         }
 
-        public short[] Analize()
+        public short[] GetAllData()
         {
             Data = new short[dataLength];
             byte[] buff = new byte[2];

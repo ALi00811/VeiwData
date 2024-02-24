@@ -43,7 +43,7 @@
             this.waveformPlot2 = new NationalInstruments.UI.WaveformPlot();
             this.xAxis2 = new NationalInstruments.UI.XAxis();
             this.yAxis2 = new NationalInstruments.UI.YAxis();
-            this.wfgChart = new NationalInstruments.UI.WindowsForms.WaveformGraph();
+            this.wfgChartIntended = new NationalInstruments.UI.WindowsForms.WaveformGraph();
             this.waveformPlot1 = new NationalInstruments.UI.WaveformPlot();
             this.xAxis1 = new NationalInstruments.UI.XAxis();
             this.yAxis1 = new NationalInstruments.UI.YAxis();
@@ -64,7 +64,7 @@
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.wfgAllData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xyCursor1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.wfgChart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.wfgChartIntended)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
@@ -147,7 +147,7 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.wfgAllData);
-            this.groupBox3.Controls.Add(this.wfgChart);
+            this.groupBox3.Controls.Add(this.wfgChartIntended);
             this.groupBox3.Location = new System.Drawing.Point(312, 26);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(1530, 948);
@@ -171,10 +171,7 @@
             this.xAxis2});
             this.wfgAllData.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
             this.yAxis2});
-            this.wfgAllData.CursorsChanged += new System.ComponentModel.CollectionChangeEventHandler(this.wfgAllData_CursorsChanged);
             this.wfgAllData.PlotAreaMouseUp += new System.Windows.Forms.MouseEventHandler(this.wfgAllData_PlotAreaMouseUp);
-            this.wfgAllData.CursorChanged += new System.EventHandler(this.wfgAllData_CursorChanged);
-            this.wfgAllData.MouseClick += new System.Windows.Forms.MouseEventHandler(this.wfgAllData_MouseClick);
             // 
             // xyCursor1
             // 
@@ -187,18 +184,18 @@
             this.waveformPlot2.XAxis = this.xAxis2;
             this.waveformPlot2.YAxis = this.yAxis2;
             // 
-            // wfgChart
+            // wfgChartIntended
             // 
-            this.wfgChart.Location = new System.Drawing.Point(23, 39);
-            this.wfgChart.Name = "wfgChart";
-            this.wfgChart.Plots.AddRange(new NationalInstruments.UI.WaveformPlot[] {
+            this.wfgChartIntended.Location = new System.Drawing.Point(23, 39);
+            this.wfgChartIntended.Name = "wfgChartIntended";
+            this.wfgChartIntended.Plots.AddRange(new NationalInstruments.UI.WaveformPlot[] {
             this.waveformPlot1});
-            this.wfgChart.Size = new System.Drawing.Size(1453, 409);
-            this.wfgChart.TabIndex = 4;
-            this.wfgChart.UseColorGenerator = true;
-            this.wfgChart.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
+            this.wfgChartIntended.Size = new System.Drawing.Size(1453, 409);
+            this.wfgChartIntended.TabIndex = 4;
+            this.wfgChartIntended.UseColorGenerator = true;
+            this.wfgChartIntended.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
             this.xAxis1});
-            this.wfgChart.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
+            this.wfgChartIntended.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
             this.yAxis1});
             // 
             // waveformPlot1
@@ -349,7 +346,7 @@
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.wfgAllData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xyCursor1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.wfgChart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.wfgChartIntended)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -385,7 +382,7 @@
         private NationalInstruments.UI.WaveformPlot waveformPlot1;
         private NationalInstruments.UI.XAxis xAxis1;
         private NationalInstruments.UI.YAxis yAxis1;
-        public NationalInstruments.UI.WindowsForms.WaveformGraph wfgChart;
+        public NationalInstruments.UI.WindowsForms.WaveformGraph wfgChartIntended;
         public NationalInstruments.UI.WindowsForms.WaveformGraph wfgAllData;
         private NationalInstruments.UI.WaveformPlot waveformPlot2;
         private NationalInstruments.UI.XAxis xAxis2;
