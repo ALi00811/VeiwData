@@ -41,37 +41,44 @@ namespace VeiwData.Classes
             switch (perecentIntended)
             {
                 case 1:
-                    DrawingAllData();
+                    DrawingChart(true, indexIntendedDatas, step);
                     break;
 
                 case 2:
-                    DrawingChart(indexIntendedDatas, step);
+                    DrawingChart(false,indexIntendedDatas, step);
                     break;
 
                 case 3:
-                    //openForms.wfgChartIntended.Plots[0].PlotY(allDataIntended);
+                    DrawingChart(false, indexIntendedDatas, step);
                     break;
 
             }
         }
-        private void DrawingChart(double indexIntendedDatas, double step)
+        private void DrawingChart(bool accessAllData, double indexIntendedDatas, double step)
         {
-            allDataIntended = new short[(int)step * 2];
-            int i = (int)(indexIntendedDatas - step);
-            int numBreak = (int)(indexIntendedDatas + step);
-
-            for (; i < datas.Length; i++)
+            if (accessAllData)
             {
-                for (int j = 0; j < numBreak; j++)
-                {
-                    if (j == allDataIntended.Length) { break; }
-                    allDataIntended[j] = datas[i];
-                }
+                openForms.wfgChartIntended.Plots[0].PlotY(allData);
             }
+            else
+            {
+                allDataIntended = new short[(int)step * 2];
+                int i = (int)(indexIntendedDatas - step);
+                int numBreak = (int)(indexIntendedDatas + step);
 
-            dataIntended = new double[allDataIntended.Length];
-            Array.Copy(allDataIntended, 0, dataIntended, 0, allDataIntended.Length - 1);
-            openForms.wfgChartIntended.Plots[0].PlotY(dataIntended);
+                for (; i < datas.Length; i++)
+                {
+                    for (int j = 0; j < numBreak; j++)
+                    {
+                        if (j == allDataIntended.Length) { break; }
+                        allDataIntended[j] = datas[i];
+                    }
+                }
+
+                dataIntended = new double[allDataIntended.Length];
+                Array.Copy(allDataIntended, 0, dataIntended, 0, allDataIntended.Length - 1);
+                openForms.wfgChartIntended.Plots[0].PlotY(dataIntended);
+            }
         }
 
     }

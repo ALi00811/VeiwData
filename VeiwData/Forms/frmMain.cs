@@ -18,7 +18,6 @@ namespace VeiwData
         SetChart setchart;
         Resolotion resolotion;
         public int DisplayRange { get; set; }
-        //public short[] DataDisplayRange { get; set; }
         public bool access = false;
         public double IndexSpace { get; set; }
 
@@ -38,6 +37,8 @@ namespace VeiwData
         {
             lblSizeData.Text = "0M";
             lblNameFile.Text = "FileName";
+            wfgAllData.Plots.Clear();
+            wfgChartIntended.Plots.Clear();
         }
 
         private void btnMenuOpenFile_Click(object sender, EventArgs e)
@@ -50,7 +51,7 @@ namespace VeiwData
             var Result = OpenFile.Open();
             if (access)
             {
-                Da = new Dataloading(Result , resolotion);
+                Da = new Dataloading(Result, resolotion);
                 setchart = new SetChart(Da.GetAllData());
 
                 lblNameFile.Text = Result.OpenFileDialog.FileName;
@@ -60,26 +61,17 @@ namespace VeiwData
 
         private void rdFull_CheckedChanged(object sender, EventArgs e)
         {
-            if (rdFull.Checked)
-            {
-                DisplayRange = 1;
-            }
+            DisplayRange = 1;
         }
 
         private void rdHalf_CheckedChanged(object sender, EventArgs e)
         {
-            if (rdHalf.Checked)
-            {
-                DisplayRange = 2;
-            }
+            DisplayRange = 2;
         }
 
         private void rdless_CheckedChanged(object sender, EventArgs e)
         {
-            if (rdless.Checked)
-            {
-                DisplayRange = 3;
-            }
+            DisplayRange = 3;
         }
 
         private void wfgAllData_PlotAreaMouseUp(object sender, MouseEventArgs e)
@@ -89,9 +81,10 @@ namespace VeiwData
                 double xData, yData = 0;
                 Point p = new Point(e.X, e.Y);
 
-                wfgAllData.Plots[0].InverseMapDataPoint(wfgAllData.PlotAreaBounds, p, out xData,out yData);
+                wfgAllData.Plots[0].InverseMapDataPoint(wfgAllData.PlotAreaBounds, p, out xData, out yData);
                 wfgAllData.Cursors[0].XPosition = xData;
-                if (DisplayRange != 1) { IndexSpace = DisplayRange == 2 ? resolotion.Width * 0.1 : resolotion.Width * 0.5; }
+                xData = (int)(Math.Abs(xData));
+                if (DisplayRange != 1) { IndexSpace = DisplayRange == 2 ? resolotion.Width * 0.5 : resolotion.Width * 0.1; }
                 setchart.DrawingIntendedData(xData, (int)IndexSpace, DisplayRange);
             }
         }
