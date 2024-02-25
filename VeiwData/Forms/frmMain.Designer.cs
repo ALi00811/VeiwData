@@ -44,7 +44,7 @@
             this.xAxis2 = new NationalInstruments.UI.XAxis();
             this.yAxis2 = new NationalInstruments.UI.YAxis();
             this.wfgChartIntended = new NationalInstruments.UI.WindowsForms.WaveformGraph();
-            this.waveformPlot1 = new NationalInstruments.UI.WaveformPlot();
+            this.Plot1 = new NationalInstruments.UI.WaveformPlot();
             this.xAxis1 = new NationalInstruments.UI.XAxis();
             this.yAxis1 = new NationalInstruments.UI.YAxis();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -189,7 +189,7 @@
             this.wfgChartIntended.Location = new System.Drawing.Point(23, 39);
             this.wfgChartIntended.Name = "wfgChartIntended";
             this.wfgChartIntended.Plots.AddRange(new NationalInstruments.UI.WaveformPlot[] {
-            this.waveformPlot1});
+            this.Plot1});
             this.wfgChartIntended.Size = new System.Drawing.Size(1453, 409);
             this.wfgChartIntended.TabIndex = 4;
             this.wfgChartIntended.UseColorGenerator = true;
@@ -198,10 +198,15 @@
             this.wfgChartIntended.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
             this.yAxis1});
             // 
-            // waveformPlot1
+            // Plot1
             // 
-            this.waveformPlot1.XAxis = this.xAxis1;
-            this.waveformPlot1.YAxis = this.yAxis1;
+            this.Plot1.FillMode = NationalInstruments.UI.PlotFillMode.FillAndBins;
+            this.Plot1.FillToBaseColor = System.Drawing.Color.Lime;
+            this.Plot1.FillToBaseStyle = NationalInstruments.UI.FillStyle.Shingle;
+            this.Plot1.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Plot1.LineToBaseStyle = NationalInstruments.UI.LineStyle.Dash;
+            this.Plot1.XAxis = this.xAxis1;
+            this.Plot1.YAxis = this.yAxis1;
             // 
             // groupBox2
             // 
@@ -379,7 +384,7 @@
         private System.Windows.Forms.RadioButton rdFull;
         public System.Windows.Forms.Label lblSizeData;
         public System.Windows.Forms.Label lblNameFile;
-        private NationalInstruments.UI.WaveformPlot waveformPlot1;
+        private NationalInstruments.UI.WaveformPlot Plot1;
         private NationalInstruments.UI.XAxis xAxis1;
         private NationalInstruments.UI.YAxis yAxis1;
         public NationalInstruments.UI.WindowsForms.WaveformGraph wfgChartIntended;
