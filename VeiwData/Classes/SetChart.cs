@@ -29,7 +29,9 @@ namespace VeiwData.Classes
         {
             datas = data;
             allData = new double[datas.Length];
+
             Array.Copy(datas, 0, allData, 0, datas.Length);
+
             DrawingAllData();
         }
         private void DrawingAllData()
@@ -45,7 +47,7 @@ namespace VeiwData.Classes
                     break;
 
                 case 2:
-                    DrawingChart(false,indexIntendedDatas, step);
+                    DrawingChart(false, indexIntendedDatas, step);
                     break;
 
                 case 3:
@@ -63,20 +65,13 @@ namespace VeiwData.Classes
             else
             {
                 allDataIntended = new short[(int)step * 2];
-                int i = (int)(indexIntendedDatas - step);
-                int numBreak = (int)(indexIntendedDatas + step);
-
-                for (; i < datas.Length; i++)
-                {
-                    for (int j = 0; j < numBreak; j++)
-                    {
-                        if (j == allDataIntended.Length) { break; }
-                        allDataIntended[j] = datas[i];
-                    }
-                }
-
+                int startIndex = (int)(indexIntendedDatas - step);
                 dataIntended = new double[allDataIntended.Length];
+
+                Array.Copy(datas, startIndex, allDataIntended, 0, allDataIntended.Length);
                 Array.Copy(allDataIntended, 0, dataIntended, 0, allDataIntended.Length - 1);
+
+                openForms.wfgAllData.Plots[0].FillToBaseColor = Color.Yellow;
                 openForms.wfgChartIntended.Plots[0].PlotY(dataIntended);
             }
         }

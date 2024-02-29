@@ -200,10 +200,11 @@
             // 
             // Plot1
             // 
-            this.Plot1.FillMode = NationalInstruments.UI.PlotFillMode.FillAndBins;
+            this.Plot1.FillBase = NationalInstruments.UI.XYPlotFillBase.Plot;
             this.Plot1.FillToBaseColor = System.Drawing.Color.Lime;
             this.Plot1.FillToBaseStyle = NationalInstruments.UI.FillStyle.Shingle;
             this.Plot1.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Plot1.LineToBaseColor = System.Drawing.Color.Transparent;
             this.Plot1.LineToBaseStyle = NationalInstruments.UI.LineStyle.Dash;
             this.Plot1.XAxis = this.xAxis1;
             this.Plot1.YAxis = this.yAxis1;

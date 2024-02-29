@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using VeiwData.Classes;
+using System.Windows.Input;
+
 
 namespace VeiwData
 {
@@ -20,6 +15,7 @@ namespace VeiwData
         public int DisplayRange { get; set; }
         public bool access = false;
         public double IndexSpace { get; set; }
+        double xData, yData = 0;
 
         public frmMain()
         {
@@ -74,19 +70,31 @@ namespace VeiwData
             DisplayRange = 3;
         }
 
-        private void wfgAllData_PlotAreaMouseUp(object sender, MouseEventArgs e)
+
+        private void wfgAllData_PlotAreaMouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if (access)
             {
-                double xData, yData = 0;
-                Point p = new Point(e.X, e.Y);
+                try
+                {
+                    double xData, yData = 0;
+                    Point p = new Point(e.X, e.Y);
 
-                wfgAllData.Plots[0].InverseMapDataPoint(wfgAllData.PlotAreaBounds, p, out xData, out yData);
-                wfgAllData.Cursors[0].XPosition = xData;
-                xData = (int)(Math.Abs(xData));
-                if (DisplayRange != 1) { IndexSpace = DisplayRange == 2 ? resolotion.Width * 0.5 : resolotion.Width * 0.1; }
-                setchart.DrawingIntendedData(xData, (int)IndexSpace, DisplayRange);
+                    wfgAllData.Plots[0].InverseMapDataPoint(wfgAllData.PlotAreaBounds, p, out xData, out yData);
+                    wfgAllData.Cursors[0].XPosition = xData;
+
+                    xData = (int)(Math.Abs(xData));
+
+                    if (DisplayRange != 1) { IndexSpace = DisplayRange == 2 ? resolotion.Width * 0.5 : resolotion.Width * 0.1; }
+                    setchart.DrawingIntendedData(xData, (int)IndexSpace, DisplayRange);
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
+
     }
 }
