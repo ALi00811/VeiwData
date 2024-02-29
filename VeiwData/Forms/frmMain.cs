@@ -48,7 +48,7 @@ namespace VeiwData
             if (access)
             {
                 Da = new Dataloading(Result, resolotion);
-                setchart = new SetChart(Da.GetAllData());
+                setchart = new SetChart(Da.GetAllData(),Result);
 
                 lblNameFile.Text = Result.OpenFileDialog.FileName;
                 lblSizeData.Text = Result.FileStream.Length.ToString("#,0");
@@ -77,7 +77,6 @@ namespace VeiwData
             {
                 try
                 {
-                    double xData, yData = 0;
                     Point p = new Point(e.X, e.Y);
 
                     wfgAllData.Plots[0].InverseMapDataPoint(wfgAllData.PlotAreaBounds, p, out xData, out yData);

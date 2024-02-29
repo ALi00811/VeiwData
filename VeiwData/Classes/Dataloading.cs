@@ -32,7 +32,7 @@ namespace VeiwData.Classes
             fileLength = new FileInfo(OpenFileDialog.FileName).Length;
             step = fileLength / dataLength;
 
-            GetAllData();
+            
         }
 
         public short[] GetAllData()

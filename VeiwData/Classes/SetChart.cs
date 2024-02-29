@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -22,11 +23,16 @@ namespace VeiwData.Classes
         private double[] allData;
         private short[] allDataIntended;
         private double[] dataIntended;
+        FileStream fileStream;
+        long[] dataFile;
 
         #endregion
 
-        public SetChart(short[] data)
+        public SetChart(short[] data, Model model)
         {
+            fileStream = model.FileStream;
+            dataFile = new long[fileStream.Length];
+            
             datas = data;
             allData = new double[datas.Length];
 
@@ -68,11 +74,11 @@ namespace VeiwData.Classes
                 int startIndex = (int)(indexIntendedDatas - step);
                 dataIntended = new double[allDataIntended.Length];
 
-                Array.Copy(datas, startIndex, allDataIntended, 0, allDataIntended.Length);
+                Array.Copy(dataFile, startIndex, allDataIntended, 0, allDataIntended.Length);
                 Array.Copy(allDataIntended, 0, dataIntended, 0, allDataIntended.Length - 1);
 
                 openForms.wfgAllData.Plots[0].FillToBaseColor = Color.Yellow;
-                openForms.wfgChartIntended.Plots[0].PlotY(dataIntended);
+                openForms.wfgChartIntended.Plots[0].PlotY(dataIntended); 
             }
         }
 
