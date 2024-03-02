@@ -1,10 +1,4 @@
-﻿
-
-
-
-
-
-namespace System
+﻿namespace System
 {
     internal class MouseEventArgs
     {

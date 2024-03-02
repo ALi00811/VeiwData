@@ -1,38 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace VeiwData.Classes
 {
     public class Dataloading
     {
         #region Properties
-        private BinaryReader BinaryReader { get; set; }
         private FileStream FileStream { get; set; }
-        private OpenFileDialog OpenFileDialog { get; set; }
+        private FileStream FileStreamIntended { get; set; }
         short[] Data { get; set; }
         long dataLength = 0;
-        long fileLength = 0;
         long step = 0;
         #endregion
 
-        public Dataloading(Model model, Resolotion resolotion)
+        public Dataloading(FileStream fileStream, int withScreen, long filelength)
         {
-            BinaryReader = model.BinaryReader;
-            FileStream = model.FileStream;
-            OpenFileDialog = model.OpenFileDialog;
+            FileStream = fileStream;
+            FileStreamIntended = fileStream;
+            dataLength = withScreen * 2;
 
-            dataLength = resolotion.Width * 2;
-
-            fileLength = new FileInfo(OpenFileDialog.FileName).Length;
-            step = fileLength / dataLength;
-
-            
+            step = filelength / dataLength;
         }
 
         public short[] GetAllData()
@@ -46,8 +33,25 @@ namespace VeiwData.Classes
                 FileStream.Read(buff, 0, 2);
                 Data[i] = BitConverter.ToInt16(buff, 0);
             }
-            
+
             return Data;
+        }
+
+        public short[] GetDataIntended(int startIndex, long dataLength, int end)
+        {
+            short[] DataIntended = new short[dataLength + 1];
+            byte[] buff = new byte[2];
+            int indexCount = 0;
+            int i = startIndex;
+            FileStreamIntended.Seek(startIndex, SeekOrigin.Begin);
+            for (; i < end; i++)
+            {
+                FileStreamIntended.Read(buff, 0, 2);
+                DataIntended[indexCount] = BitConverter.ToInt16(buff, 0);
+                indexCount ++;
+            }
+
+            return DataIntended;
         }
     }
 }

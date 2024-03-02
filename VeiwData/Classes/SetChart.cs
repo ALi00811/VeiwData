@@ -1,15 +1,8 @@
-﻿using NationalInstruments.UI;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
 
 
 namespace VeiwData.Classes
@@ -17,26 +10,18 @@ namespace VeiwData.Classes
     public class SetChart
     {
         #region Properties
-
-        short[] datas;
         frmMain openForms = Application.OpenForms.Cast<frmMain>().FirstOrDefault();
         private double[] allData;
         private short[] allDataIntended;
         private double[] dataIntended;
-        FileStream fileStream;
+        
         long[] dataFile;
-
         #endregion
 
-        public SetChart(short[] data, Model model)
+        public SetChart(short[] data)
         {
-            fileStream = model.FileStream;
-            dataFile = new long[fileStream.Length];
-            
-            datas = data;
-            allData = new double[datas.Length];
-
-            Array.Copy(datas, 0, allData, 0, datas.Length);
+            allData = new double[data.Length];
+            Array.Copy(data, 0, allData, 0, data.Length);
 
             DrawingAllData();
         }
@@ -44,43 +29,29 @@ namespace VeiwData.Classes
         {
             openForms.wfgAllData.Plots[0].PlotY(allData);
         }
-        public void DrawingIntendedData(double indexIntendedDatas, double step, int perecentIntended)
+        public void DrawingIntendedData(short[] dataChart, int perecentIntended)
         {
             switch (perecentIntended)
             {
                 case 1:
-                    DrawingChart(true, indexIntendedDatas, step);
+                    openForms.wfgChartIntended.Plots[0].PlotY(allData);
                     break;
 
                 case 2:
-                    DrawingChart(false, indexIntendedDatas, step);
+                    DrawingChart(dataChart);
                     break;
 
                 case 3:
-                    DrawingChart(false, indexIntendedDatas, step);
+                    DrawingChart(dataChart);
                     break;
 
             }
         }
-        private void DrawingChart(bool accessAllData, double indexIntendedDatas, double step)
+        private void DrawingChart(short[] data)
         {
-            if (accessAllData)
-            {
-                openForms.wfgChartIntended.Plots[0].PlotY(allData);
-            }
-            else
-            {
-                allDataIntended = new short[(int)step * 2];
-                int startIndex = (int)(indexIntendedDatas - step);
-                dataIntended = new double[allDataIntended.Length];
-
-                Array.Copy(dataFile, startIndex, allDataIntended, 0, allDataIntended.Length);
-                Array.Copy(allDataIntended, 0, dataIntended, 0, allDataIntended.Length - 1);
-
-                openForms.wfgAllData.Plots[0].FillToBaseColor = Color.Yellow;
+                dataIntended = new double[data.Length];
+                Array.Copy(data, 0, dataIntended, 0, data.Length);
                 openForms.wfgChartIntended.Plots[0].PlotY(dataIntended); 
-            }
         }
-
     }
 }

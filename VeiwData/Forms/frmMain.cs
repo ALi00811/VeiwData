@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.Windows.Forms;
 using VeiwData.Classes;
-using System.Windows.Input;
 
 
 namespace VeiwData
@@ -11,17 +10,19 @@ namespace VeiwData
     {
         Dataloading Da;
         SetChart setchart;
-        Resolotion resolotion;
         public int DisplayRange { get; set; }
         public bool access = false;
         public double IndexSpace { get; set; }
         double xData, yData = 0;
+        public int WithScreen { get; set; }
+        public short[] DataIntended{ get; set; }
 
         public frmMain()
         {
             InitializeComponent();
             DisplayRange = 2;
-            resolotion = new Resolotion();
+            var resolotion = new Resolotion();
+            WithScreen = resolotion.Width;
         }
 
         private void btnChoose_Click(object sender, EventArgs e)
@@ -47,11 +48,11 @@ namespace VeiwData
             var Result = OpenFile.Open();
             if (access)
             {
-                Da = new Dataloading(Result, resolotion);
-                setchart = new SetChart(Da.GetAllData(),Result);
+                Da = new Dataloading(Result.Item1, WithScreen, Result.Item2);
+                setchart = new SetChart(Da.GetAllData());
 
-                lblNameFile.Text = Result.OpenFileDialog.FileName;
-                lblSizeData.Text = Result.FileStream.Length.ToString("#,0");
+                lblNameFile.Text = Result.Item1.ToString();
+                lblSizeData.Text = Result.Item1.Length.ToString("#,0");
             }
         }
 
@@ -84,8 +85,13 @@ namespace VeiwData
 
                     xData = (int)(Math.Abs(xData));
 
-                    if (DisplayRange != 1) { IndexSpace = DisplayRange == 2 ? resolotion.Width * 0.5 : resolotion.Width * 0.1; }
-                    setchart.DrawingIntendedData(xData, (int)IndexSpace, DisplayRange);
+                    if (DisplayRange != 1)
+                    {
+                        IndexSpace = DisplayRange == 2 ? WithScreen * 0.5 : WithScreen * 0.1;
+                        DataIntended = Da.GetDataIntended((int)xData - ((int)IndexSpace / 2), (long)IndexSpace, (int)xData + ((int)IndexSpace / 2));
+                    }
+
+                    setchart.DrawingIntendedData(DataIntended, DisplayRange);
 
                 }
                 catch (Exception ex)
