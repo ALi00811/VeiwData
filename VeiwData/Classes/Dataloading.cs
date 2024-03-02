@@ -9,7 +9,7 @@ namespace VeiwData.Classes
         private FileStream FileStream { get; set; }
         private FileStream FileStreamIntended { get; set; }
         short[] Data { get; set; }
-        long dataLength = 0;
+        long dataLengthOrg = 0;
         long step = 0;
         #endregion
 
@@ -17,41 +17,45 @@ namespace VeiwData.Classes
         {
             FileStream = fileStream;
             FileStreamIntended = fileStream;
-            dataLength = withScreen * 2;
+            dataLengthOrg = withScreen * 2;
 
-            step = filelength / dataLength;
+            step = filelength / dataLengthOrg;
         }
 
-        public short[] GetAllData()
+        public short[] GetData(bool getAllData,int startIndex = 0, long dataLength = 0, int end = 0)
         {
-            Data = new short[dataLength];
-            byte[] buff = new byte[2];
-
-            for (int i = 0; i < dataLength; i++)
+            if (getAllData)
             {
-                FileStream.Seek(i * step, SeekOrigin.Begin);
-                FileStream.Read(buff, 0, 2);
-                Data[i] = BitConverter.ToInt16(buff, 0);
+                Data = new short[dataLengthOrg];
+                byte[] buff = new byte[2];
+
+                for (int i = 0; i < dataLengthOrg; i++)
+                {
+                    FileStream.Seek(i * step, SeekOrigin.Begin);
+                    FileStream.Read(buff, 0, 2);
+                    Data[i] = BitConverter.ToInt16(buff, 0);
+                }
+
+                return Data;
             }
-
-            return Data;
-        }
-
-        public short[] GetDataIntended(int startIndex, long dataLength, int end)
-        {
-            short[] DataIntended = new short[dataLength + 1];
-            byte[] buff = new byte[2];
-            int indexCount = 0;
-            int i = startIndex;
-            FileStreamIntended.Seek(startIndex, SeekOrigin.Begin);
-            for (; i < end; i++)
+            else
             {
-                FileStreamIntended.Read(buff, 0, 2);
-                DataIntended[indexCount] = BitConverter.ToInt16(buff, 0);
-                indexCount ++;
-            }
+                startIndex = startIndex <= 0 ? 0 : startIndex;
+                short[] DataIntended = new short[dataLength + 1];
+                byte[] buff = new byte[2];
+                int indexCount = 0;
+                int i = startIndex;
+                FileStreamIntended.Seek(startIndex, SeekOrigin.Begin);
+                for (; i < end; i++)
+                {
+                    FileStreamIntended.Read(buff, 0, 2);
+                    DataIntended[indexCount] = BitConverter.ToInt16(buff, 0);
+                    indexCount++;
+                }
 
-            return DataIntended;
+
+                return DataIntended;
+            }
         }
     }
 }

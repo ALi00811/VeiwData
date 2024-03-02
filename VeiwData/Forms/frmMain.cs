@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NationalInstruments.UI;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using VeiwData.Classes;
@@ -16,6 +17,7 @@ namespace VeiwData
         double xData, yData = 0;
         public int WithScreen { get; set; }
         public short[] DataIntended{ get; set; }
+        Point p;
 
         public frmMain()
         {
@@ -23,6 +25,7 @@ namespace VeiwData
             DisplayRange = 2;
             var resolotion = new Resolotion();
             WithScreen = resolotion.Width;
+        
         }
 
         private void btnChoose_Click(object sender, EventArgs e)
@@ -49,7 +52,7 @@ namespace VeiwData
             if (access)
             {
                 Da = new Dataloading(Result.Item1, WithScreen, Result.Item2);
-                setchart = new SetChart(Da.GetAllData());
+                setchart = new SetChart(Da.GetData(true));
 
                 lblNameFile.Text = Result.Item1.ToString();
                 lblSizeData.Text = Result.Item1.Length.ToString("#,0");
@@ -71,27 +74,14 @@ namespace VeiwData
             DisplayRange = 3;
         }
 
-
         private void wfgAllData_PlotAreaMouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if (access)
             {
                 try
                 {
-                    Point p = new Point(e.X, e.Y);
-
-                    wfgAllData.Plots[0].InverseMapDataPoint(wfgAllData.PlotAreaBounds, p, out xData, out yData);
-                    wfgAllData.Cursors[0].XPosition = xData;
-
-                    xData = (int)(Math.Abs(xData));
-
-                    if (DisplayRange != 1)
-                    {
-                        IndexSpace = DisplayRange == 2 ? WithScreen * 0.5 : WithScreen * 0.1;
-                        DataIntended = Da.GetDataIntended((int)xData - ((int)IndexSpace / 2), (long)IndexSpace, (int)xData + ((int)IndexSpace / 2));
-                    }
-
-                    setchart.DrawingIntendedData(DataIntended, DisplayRange);
+                    GetX(e);
+                    DataPoint();
 
                 }
                 catch (Exception ex)
@@ -101,5 +91,36 @@ namespace VeiwData
             }
         }
 
+        private void GetX(System.Windows.Forms.MouseEventArgs e)
+        {
+            p = new Point(e.X, e.Y);
+
+            wfgAllData.Plots[0].InverseMapDataPoint(wfgAllData.PlotAreaBounds, p, out xData, out yData);
+            wfgAllData.Cursors[0].XPosition = xData;
+
+            xData = (int)(Math.Abs(xData));
+        }
+
+        private void wfgChartIntended_PlotAreaMouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left) 
+            {
+                int a = e.Location.X;
+                
+            }
+        }
+
+        private void DataPoint()
+        {
+
+            if (DisplayRange != 1)
+            {
+                IndexSpace = DisplayRange == 2 ? WithScreen * 0.5 : WithScreen * 0.1;
+                DataIntended = Da.GetData(false,(int)xData - ((int)IndexSpace / 2), (long)IndexSpace, (int)xData + ((int)IndexSpace / 2));
+            }
+
+            setchart.DrawingIntendedData(DataIntended, DisplayRange);
+
+        }
     }
 }

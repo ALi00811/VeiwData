@@ -12,10 +12,8 @@ namespace VeiwData.Classes
         #region Properties
         frmMain openForms = Application.OpenForms.Cast<frmMain>().FirstOrDefault();
         private double[] allData;
-        private short[] allDataIntended;
         private double[] dataIntended;
-        
-        long[] dataFile;
+
         #endregion
 
         public SetChart(short[] data)
@@ -49,9 +47,10 @@ namespace VeiwData.Classes
         }
         private void DrawingChart(short[] data)
         {
-                dataIntended = new double[data.Length];
-                Array.Copy(data, 0, dataIntended, 0, data.Length);
-                openForms.wfgChartIntended.Plots[0].PlotY(dataIntended); 
+            dataIntended = new double[data.Length];
+            Array.Copy(data, 0, dataIntended, 0, data.Length);
+            openForms.wfgChartIntended.Plots[0].PlotY(dataIntended);
+
         }
     }
 }
