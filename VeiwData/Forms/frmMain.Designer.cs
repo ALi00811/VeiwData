@@ -31,50 +31,51 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.btnMenuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.btnMenuOpenFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnMenuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.btnMenuEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnMenuVeiw = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnMenuTreeView = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblStatusProcessor = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.sbChart = new System.Windows.Forms.HScrollBar();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.lblRangeData = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblLengthData = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblCurser = new System.Windows.Forms.Label();
             this.wfgAllData = new NationalInstruments.UI.WindowsForms.WaveformGraph();
-            this.xyCursor1 = new NationalInstruments.UI.XYCursor();
+            this.CursorSing = new NationalInstruments.UI.XYCursor();
             this.waveformPlot2 = new NationalInstruments.UI.WaveformPlot();
             this.xAxis2 = new NationalInstruments.UI.XAxis();
             this.yAxis2 = new NationalInstruments.UI.YAxis();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.rdless = new System.Windows.Forms.RadioButton();
+            this.rdHalf = new System.Windows.Forms.RadioButton();
+            this.rdFull = new System.Windows.Forms.RadioButton();
             this.wfgChartIntended = new NationalInstruments.UI.WindowsForms.WaveformGraph();
             this.Plot1 = new NationalInstruments.UI.WaveformPlot();
             this.xAxis1 = new NationalInstruments.UI.XAxis();
             this.yAxis1 = new NationalInstruments.UI.YAxis();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.rdless = new System.Windows.Forms.RadioButton();
-            this.rdHalf = new System.Windows.Forms.RadioButton();
-            this.rdFull = new System.Windows.Forms.RadioButton();
+            this.tvFileName = new System.Windows.Forms.TreeView();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnChoose = new System.Windows.Forms.Button();
-            this.tvFileName = new System.Windows.Forms.TreeView();
-            this.btnMenuTreeView = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.lblCurser = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblLengthData = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.lblRangeData = new System.Windows.Forms.Label();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnMenuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.wfgAllData)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xyCursor1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CursorSing)).BeginInit();
+            this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.wfgChartIntended)).BeginInit();
             this.groupBox2.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -102,9 +103,21 @@
             // btnMenuOpenFile
             // 
             this.btnMenuOpenFile.Name = "btnMenuOpenFile";
-            this.btnMenuOpenFile.Size = new System.Drawing.Size(180, 22);
+            this.btnMenuOpenFile.Size = new System.Drawing.Size(121, 22);
             this.btnMenuOpenFile.Text = "OpenFile";
             this.btnMenuOpenFile.Click += new System.EventHandler(this.btnMenuOpenFile_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(118, 6);
+            // 
+            // btnMenuExit
+            // 
+            this.btnMenuExit.Name = "btnMenuExit";
+            this.btnMenuExit.Size = new System.Drawing.Size(121, 22);
+            this.btnMenuExit.Text = "Exit";
+            this.btnMenuExit.Click += new System.EventHandler(this.btnMenuExit_Click);
             // 
             // btnMenuEdit
             // 
@@ -117,7 +130,7 @@
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
             this.clearToolStripMenuItem.Text = "Clear";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
             // 
@@ -128,6 +141,13 @@
             this.btnMenuVeiw.Name = "btnMenuVeiw";
             this.btnMenuVeiw.Size = new System.Drawing.Size(43, 20);
             this.btnMenuVeiw.Text = "Veiw";
+            // 
+            // btnMenuTreeView
+            // 
+            this.btnMenuTreeView.Name = "btnMenuTreeView";
+            this.btnMenuTreeView.Size = new System.Drawing.Size(120, 22);
+            this.btnMenuTreeView.Text = "TreeView";
+            this.btnMenuTreeView.Click += new System.EventHandler(this.btnMenuTreeView_Click);
             // 
             // statusStrip1
             // 
@@ -152,30 +172,109 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(13, 27);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1810, 645);
+            this.groupBox1.Size = new System.Drawing.Size(1810, 657);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Data";
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.sbChart);
             this.groupBox3.Controls.Add(this.groupBox5);
             this.groupBox3.Controls.Add(this.wfgAllData);
             this.groupBox3.Controls.Add(this.groupBox4);
             this.groupBox3.Controls.Add(this.wfgChartIntended);
             this.groupBox3.Location = new System.Drawing.Point(290, 18);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1500, 611);
+            this.groupBox3.Size = new System.Drawing.Size(1500, 633);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Chart";
+            // 
+            // sbChart
+            // 
+            this.sbChart.Location = new System.Drawing.Point(37, 83);
+            this.sbChart.Name = "sbChart";
+            this.sbChart.Size = new System.Drawing.Size(1425, 25);
+            this.sbChart.TabIndex = 6;
+            this.sbChart.Visible = false;
+            this.sbChart.ValueChanged += new System.EventHandler(this.sbChart_ValueChanged);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.lblRangeData);
+            this.groupBox5.Controls.Add(this.label3);
+            this.groupBox5.Controls.Add(this.label2);
+            this.groupBox5.Controls.Add(this.lblLengthData);
+            this.groupBox5.Controls.Add(this.label1);
+            this.groupBox5.Controls.Add(this.lblCurser);
+            this.groupBox5.Location = new System.Drawing.Point(322, 15);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(643, 60);
+            this.groupBox5.TabIndex = 5;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Data";
+            // 
+            // lblRangeData
+            // 
+            this.lblRangeData.AutoSize = true;
+            this.lblRangeData.Location = new System.Drawing.Point(468, 26);
+            this.lblRangeData.Name = "lblRangeData";
+            this.lblRangeData.Size = new System.Drawing.Size(31, 16);
+            this.lblRangeData.TabIndex = 2;
+            this.lblRangeData.Text = "0 - 0";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(344, 26);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(118, 16);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Range View Data :";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(151, 26);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(82, 16);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "LengthData :";
+            // 
+            // lblLengthData
+            // 
+            this.lblLengthData.AutoSize = true;
+            this.lblLengthData.Location = new System.Drawing.Point(236, 26);
+            this.lblLengthData.Name = "lblLengthData";
+            this.lblLengthData.Size = new System.Drawing.Size(14, 16);
+            this.lblLengthData.TabIndex = 1;
+            this.lblLengthData.Text = "0";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(11, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 16);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "XCurser : ";
+            // 
+            // lblCurser
+            // 
+            this.lblCurser.AutoSize = true;
+            this.lblCurser.Location = new System.Drawing.Point(74, 26);
+            this.lblCurser.Name = "lblCurser";
+            this.lblCurser.Size = new System.Drawing.Size(14, 16);
+            this.lblCurser.TabIndex = 0;
+            this.lblCurser.Text = "0";
             // 
             // wfgAllData
             // 
             this.wfgAllData.Cursor = System.Windows.Forms.Cursors.Default;
             this.wfgAllData.Cursors.AddRange(new NationalInstruments.UI.XYCursor[] {
-            this.xyCursor1});
-            this.wfgAllData.Location = new System.Drawing.Point(23, 478);
+            this.CursorSing});
+            this.wfgAllData.Location = new System.Drawing.Point(23, 501);
             this.wfgAllData.Name = "wfgAllData";
             this.wfgAllData.Plots.AddRange(new NationalInstruments.UI.WaveformPlot[] {
             this.waveformPlot2});
@@ -189,10 +288,9 @@
             this.wfgAllData.PlotAreaMouseMove += new System.Windows.Forms.MouseEventHandler(this.wfgAllData_PlotAreaMouseMove);
             this.wfgAllData.PlotAreaMouseUp += new System.Windows.Forms.MouseEventHandler(this.wfgAllData_PlotAreaMouseUp);
             // 
-            // xyCursor1
+            // CursorSing
             // 
-            this.xyCursor1.HorizontalCrosshairMode = NationalInstruments.UI.CursorCrosshairMode.None;
-            this.xyCursor1.Plot = this.waveformPlot2;
+            this.CursorSing.Plot = this.waveformPlot2;
             // 
             // waveformPlot2
             // 
@@ -200,49 +298,12 @@
             this.waveformPlot2.XAxis = this.xAxis2;
             this.waveformPlot2.YAxis = this.yAxis2;
             // 
-            // wfgChartIntended
-            // 
-            this.wfgChartIntended.Location = new System.Drawing.Point(23, 87);
-            this.wfgChartIntended.Name = "wfgChartIntended";
-            this.wfgChartIntended.Plots.AddRange(new NationalInstruments.UI.WaveformPlot[] {
-            this.Plot1});
-            this.wfgChartIntended.Size = new System.Drawing.Size(1453, 378);
-            this.wfgChartIntended.TabIndex = 4;
-            this.wfgChartIntended.UseColorGenerator = true;
-            this.wfgChartIntended.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
-            this.xAxis1});
-            this.wfgChartIntended.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
-            this.yAxis1});
-            // 
-            // Plot1
-            // 
-            this.Plot1.FillBase = NationalInstruments.UI.XYPlotFillBase.Plot;
-            this.Plot1.FillToBaseColor = System.Drawing.Color.Lime;
-            this.Plot1.FillToBaseStyle = NationalInstruments.UI.FillStyle.Shingle;
-            this.Plot1.LineStyle = NationalInstruments.UI.LineStyle.Dot;
-            this.Plot1.LineToBaseColor = System.Drawing.Color.Transparent;
-            this.Plot1.LineToBaseStyle = NationalInstruments.UI.LineStyle.Dash;
-            this.Plot1.XAxis = this.xAxis1;
-            this.Plot1.YAxis = this.yAxis1;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.tvFileName);
-            this.groupBox2.Controls.Add(this.btnClear);
-            this.groupBox2.Controls.Add(this.btnChoose);
-            this.groupBox2.Location = new System.Drawing.Point(6, 18);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(278, 611);
-            this.groupBox2.TabIndex = 0;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Open File";
-            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.rdless);
             this.groupBox4.Controls.Add(this.rdHalf);
             this.groupBox4.Controls.Add(this.rdFull);
-            this.groupBox4.Location = new System.Drawing.Point(23, 21);
+            this.groupBox4.Location = new System.Drawing.Point(51, 15);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(264, 60);
             this.groupBox4.TabIndex = 2;
@@ -284,6 +345,53 @@
             this.rdFull.UseVisualStyleBackColor = true;
             this.rdFull.CheckedChanged += new System.EventHandler(this.rdFull_CheckedChanged);
             // 
+            // wfgChartIntended
+            // 
+            this.wfgChartIntended.Location = new System.Drawing.Point(23, 101);
+            this.wfgChartIntended.Name = "wfgChartIntended";
+            this.wfgChartIntended.Plots.AddRange(new NationalInstruments.UI.WaveformPlot[] {
+            this.Plot1});
+            this.wfgChartIntended.Size = new System.Drawing.Size(1453, 394);
+            this.wfgChartIntended.TabIndex = 4;
+            this.wfgChartIntended.UseColorGenerator = true;
+            this.wfgChartIntended.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
+            this.xAxis1});
+            this.wfgChartIntended.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
+            this.yAxis1});
+            // 
+            // Plot1
+            // 
+            this.Plot1.FillBase = NationalInstruments.UI.XYPlotFillBase.Plot;
+            this.Plot1.FillToBaseColor = System.Drawing.Color.Lime;
+            this.Plot1.FillToBaseStyle = NationalInstruments.UI.FillStyle.Shingle;
+            this.Plot1.LineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.Plot1.LineToBaseColor = System.Drawing.Color.Transparent;
+            this.Plot1.LineToBaseStyle = NationalInstruments.UI.LineStyle.Dash;
+            this.Plot1.XAxis = this.xAxis1;
+            this.Plot1.YAxis = this.yAxis1;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.tvFileName);
+            this.groupBox2.Controls.Add(this.btnClear);
+            this.groupBox2.Controls.Add(this.btnChoose);
+            this.groupBox2.Location = new System.Drawing.Point(6, 18);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(278, 633);
+            this.groupBox2.TabIndex = 0;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Open File";
+            // 
+            // tvFileName
+            // 
+            this.tvFileName.AllowDrop = true;
+            this.tvFileName.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.tvFileName.Location = new System.Drawing.Point(8, 86);
+            this.tvFileName.Name = "tvFileName";
+            this.tvFileName.ShowNodeToolTips = true;
+            this.tvFileName.Size = new System.Drawing.Size(264, 541);
+            this.tvFileName.TabIndex = 3;
+            // 
             // btnClear
             // 
             this.btnClear.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -306,104 +414,6 @@
             this.btnChoose.UseVisualStyleBackColor = true;
             this.btnChoose.Click += new System.EventHandler(this.btnChoose_Click);
             // 
-            // tvFileName
-            // 
-            this.tvFileName.AllowDrop = true;
-            this.tvFileName.BackColor = System.Drawing.SystemColors.MenuBar;
-            this.tvFileName.Location = new System.Drawing.Point(8, 86);
-            this.tvFileName.Name = "tvFileName";
-            this.tvFileName.ShowNodeToolTips = true;
-            this.tvFileName.Size = new System.Drawing.Size(264, 511);
-            this.tvFileName.TabIndex = 3;
-            // 
-            // btnMenuTreeView
-            // 
-            this.btnMenuTreeView.Name = "btnMenuTreeView";
-            this.btnMenuTreeView.Size = new System.Drawing.Size(180, 22);
-            this.btnMenuTreeView.Text = "TreeView";
-            this.btnMenuTreeView.Click += new System.EventHandler(this.btnMenuTreeView_Click);
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.lblRangeData);
-            this.groupBox5.Controls.Add(this.label3);
-            this.groupBox5.Controls.Add(this.label2);
-            this.groupBox5.Controls.Add(this.lblLengthData);
-            this.groupBox5.Controls.Add(this.label1);
-            this.groupBox5.Controls.Add(this.lblCurser);
-            this.groupBox5.Location = new System.Drawing.Point(294, 21);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(563, 60);
-            this.groupBox5.TabIndex = 5;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Data";
-            // 
-            // lblCurser
-            // 
-            this.lblCurser.AutoSize = true;
-            this.lblCurser.Location = new System.Drawing.Point(74, 26);
-            this.lblCurser.Name = "lblCurser";
-            this.lblCurser.Size = new System.Drawing.Size(14, 16);
-            this.lblCurser.TabIndex = 0;
-            this.lblCurser.Text = "0";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 16);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "XCurser : ";
-            // 
-            // lblLengthData
-            // 
-            this.lblLengthData.AutoSize = true;
-            this.lblLengthData.Location = new System.Drawing.Point(236, 26);
-            this.lblLengthData.Name = "lblLengthData";
-            this.lblLengthData.Size = new System.Drawing.Size(14, 16);
-            this.lblLengthData.TabIndex = 1;
-            this.lblLengthData.Text = "0";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(151, 26);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(82, 16);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "LengthData :";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(344, 26);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(118, 16);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Range View Data :";
-            // 
-            // lblRangeData
-            // 
-            this.lblRangeData.AutoSize = true;
-            this.lblRangeData.Location = new System.Drawing.Point(468, 26);
-            this.lblRangeData.Name = "lblRangeData";
-            this.lblRangeData.Size = new System.Drawing.Size(31, 16);
-            this.lblRangeData.TabIndex = 2;
-            this.lblRangeData.Text = "0 - 0";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
-            // 
-            // btnMenuExit
-            // 
-            this.btnMenuExit.Name = "btnMenuExit";
-            this.btnMenuExit.Size = new System.Drawing.Size(180, 22);
-            this.btnMenuExit.Text = "Exit";
-            this.btnMenuExit.Click += new System.EventHandler(this.btnMenuExit_Click);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -422,14 +432,14 @@
             this.statusStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.wfgAllData)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xyCursor1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.wfgChartIntended)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.wfgAllData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CursorSing)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.wfgChartIntended)).EndInit();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -462,7 +472,7 @@
         private NationalInstruments.UI.WaveformPlot waveformPlot2;
         private NationalInstruments.UI.XAxis xAxis2;
         private NationalInstruments.UI.YAxis yAxis2;
-        private NationalInstruments.UI.XYCursor xyCursor1;
+        private NationalInstruments.UI.XYCursor CursorSing;
         private System.Windows.Forms.TreeView tvFileName;
         private System.Windows.Forms.ToolStripMenuItem btnMenuTreeView;
         private System.Windows.Forms.GroupBox groupBox5;
@@ -474,6 +484,7 @@
         public System.Windows.Forms.Label lblRangeData;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem btnMenuExit;
+        public System.Windows.Forms.HScrollBar sbChart;
     }
 }
 

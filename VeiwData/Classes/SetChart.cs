@@ -26,6 +26,7 @@ namespace VeiwData.Classes
         private void DrawingAllData()
         {
             openForms.wfgAllData.Plots[0].PlotY(allData);
+            openForms.scrollBar = new ScroolBar();
         }
         public void DrawingIntendedData(short[] dataChart, int perecentIntended)
         {
@@ -50,7 +51,6 @@ namespace VeiwData.Classes
             dataIntended = new double[data.Length];
             Array.Copy(data, 0, dataIntended, 0, data.Length);
             openForms.wfgChartIntended.Plots[0].PlotY(dataIntended);
-
         }
     }
 }

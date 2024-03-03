@@ -40,7 +40,6 @@ namespace VeiwData.Classes
             }
             else
             {
-                startIndex = startIndex <= 0 ? 0 : startIndex;
                 short[] DataIntended = new short[dataLength + 1];
                 byte[] buff = new byte[2];
                 int indexCount = 0;
