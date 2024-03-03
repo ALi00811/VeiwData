@@ -7,23 +7,26 @@ namespace VeiwData
 {
     public static class OpenFile
     {
-        public static Tuple<FileStream, long> Open()
+        public static string FileName { get; set; }
+        public static long FileLength { get; set; }
+
+        public static Tuple<FileStream, long,string> Open()
         {
 
             frmMain OpenForms = Application.OpenForms.Cast<frmMain>().FirstOrDefault();
             FileStream streamReader = null;
-            long fileLength = 0;
-
+            
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     streamReader = new FileStream(ofd.FileName, FileMode.Open, FileAccess.Read);
-                    fileLength = new FileInfo(ofd.FileName).Length;
+                    FileLength = new FileInfo(ofd.FileName).Length;
                     OpenForms.access = true;
+                    FileName = ofd.FileName;
                 }
             }
-            return Tuple.Create(streamReader, fileLength);
+            return Tuple.Create(streamReader, FileLength, FileName);
         }
     }
 }

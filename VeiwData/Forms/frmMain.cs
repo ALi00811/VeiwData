@@ -16,7 +16,7 @@ namespace VeiwData
         public double IndexSpace { get; set; }
         double xData, yData = 0;
         public int WithScreen { get; set; }
-        public short[] DataIntended{ get; set; }
+        public short[] DataIntended { get; set; }
         Point p;
 
         public frmMain()
@@ -25,7 +25,7 @@ namespace VeiwData
             DisplayRange = 2;
             var resolotion = new Resolotion();
             WithScreen = resolotion.Width;
-        
+
         }
 
         private void btnChoose_Click(object sender, EventArgs e)
@@ -33,12 +33,17 @@ namespace VeiwData
             OpenOfd();
         }
 
+        private void Clear()
+        {
+            wfgAllData.Plots[0].PlotY(0);
+            wfgChartIntended.Plots[0].PlotY(0);
+            access = false;
+            tvFileName.Nodes.Clear();
+        }
+
         private void btnClear_Click(object sender, EventArgs e)
         {
-            lblSizeData.Text = "0M";
-            lblNameFile.Text = "FileName";
-            wfgAllData.Plots.Clear();
-            wfgChartIntended.Plots.Clear();
+            Clear();
         }
 
         private void btnMenuOpenFile_Click(object sender, EventArgs e)
@@ -54,8 +59,10 @@ namespace VeiwData
                 Da = new Dataloading(Result.Item1, WithScreen, Result.Item2);
                 setchart = new SetChart(Da.GetData(true));
 
-                lblNameFile.Text = Result.Item1.ToString();
-                lblSizeData.Text = Result.Item1.Length.ToString("#,0");
+                tvFileName.Nodes.Add(Result.Item3.ToString());
+                tvFileName.Nodes[0].Nodes.Add($"Size : {Result.Item2.ToString("#,0")}kb");
+                lblLengthData.Text = Result.Item2.ToString("#,0");
+                
             }
         }
 
@@ -93,21 +100,54 @@ namespace VeiwData
 
         private void GetX(System.Windows.Forms.MouseEventArgs e)
         {
+            
             p = new Point(e.X, e.Y);
-
+            lblCurser.Text = e.X.ToString();
+            
             wfgAllData.Plots[0].InverseMapDataPoint(wfgAllData.PlotAreaBounds, p, out xData, out yData);
             wfgAllData.Cursors[0].XPosition = xData;
 
             xData = (int)(Math.Abs(xData));
         }
 
-        private void wfgChartIntended_PlotAreaMouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void wfgAllData_PlotAreaMouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if(e.Button == MouseButtons.Left) 
+            if (access)
             {
-                int a = e.Location.X;
-                
+                try
+                {
+                    GetX(e);
+                    DataPoint();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
+        }
+
+        private void btnMenuTreeView_Click(object sender, EventArgs e)
+        {
+            if (tvFileName.Visible)
+            {
+                tvFileName.Visible = false;
+            }
+            else
+            {
+                tvFileName.Visible = true;
+            }
+        }
+
+        private void btnMenuExit_Click(object sender, EventArgs e)
+        {
+            if(MessageBox.Show("Close The Window ?","Exit!!",MessageBoxButtons.YesNo,MessageBoxIcon.Warning) == DialogResult.Yes)
+                Application.Exit();
+        }
+
+        private void clearToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Clear();
         }
 
         private void DataPoint()
@@ -116,7 +156,10 @@ namespace VeiwData
             if (DisplayRange != 1)
             {
                 IndexSpace = DisplayRange == 2 ? WithScreen * 0.5 : WithScreen * 0.1;
-                DataIntended = Da.GetData(false,(int)xData - ((int)IndexSpace / 2), (long)IndexSpace, (int)xData + ((int)IndexSpace / 2));
+                var start = (int)xData - ((int)IndexSpace / 2);
+                var end = (int)xData + ((int)IndexSpace / 2);
+                lblRangeData.Text = $"{start} - {end}";
+                DataIntended = Da.GetData(false, start, (long)IndexSpace, end);
             }
 
             setchart.DrawingIntendedData(DataIntended, DisplayRange);

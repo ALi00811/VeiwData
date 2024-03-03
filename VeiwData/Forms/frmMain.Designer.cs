@@ -52,12 +52,19 @@
             this.rdless = new System.Windows.Forms.RadioButton();
             this.rdHalf = new System.Windows.Forms.RadioButton();
             this.rdFull = new System.Windows.Forms.RadioButton();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lblSizeData = new System.Windows.Forms.Label();
-            this.lblNameFile = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnChoose = new System.Windows.Forms.Button();
+            this.tvFileName = new System.Windows.Forms.TreeView();
+            this.btnMenuTreeView = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.lblCurser = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblLengthData = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lblRangeData = new System.Windows.Forms.Label();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnMenuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -67,6 +74,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.wfgChartIntended)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -77,14 +85,16 @@
             this.btnMenuVeiw});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1904, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1820, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // btnMenuFile
             // 
             this.btnMenuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnMenuOpenFile});
+            this.btnMenuOpenFile,
+            this.toolStripSeparator1,
+            this.btnMenuExit});
             this.btnMenuFile.Name = "btnMenuFile";
             this.btnMenuFile.Size = new System.Drawing.Size(37, 20);
             this.btnMenuFile.Text = "File";
@@ -92,7 +102,7 @@
             // btnMenuOpenFile
             // 
             this.btnMenuOpenFile.Name = "btnMenuOpenFile";
-            this.btnMenuOpenFile.Size = new System.Drawing.Size(121, 22);
+            this.btnMenuOpenFile.Size = new System.Drawing.Size(180, 22);
             this.btnMenuOpenFile.Text = "OpenFile";
             this.btnMenuOpenFile.Click += new System.EventHandler(this.btnMenuOpenFile_Click);
             // 
@@ -107,11 +117,14 @@
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(101, 22);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.clearToolStripMenuItem.Text = "Clear";
+            this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
             // 
             // btnMenuVeiw
             // 
+            this.btnMenuVeiw.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnMenuTreeView});
             this.btnMenuVeiw.Name = "btnMenuVeiw";
             this.btnMenuVeiw.Size = new System.Drawing.Size(43, 20);
             this.btnMenuVeiw.Text = "Veiw";
@@ -120,9 +133,9 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblStatusProcessor});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 1019);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 687);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1904, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1820, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -139,18 +152,20 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(13, 27);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1879, 980);
+            this.groupBox1.Size = new System.Drawing.Size(1810, 645);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Data";
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.groupBox5);
             this.groupBox3.Controls.Add(this.wfgAllData);
+            this.groupBox3.Controls.Add(this.groupBox4);
             this.groupBox3.Controls.Add(this.wfgChartIntended);
-            this.groupBox3.Location = new System.Drawing.Point(312, 26);
+            this.groupBox3.Location = new System.Drawing.Point(290, 18);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1530, 948);
+            this.groupBox3.Size = new System.Drawing.Size(1500, 611);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Chart";
@@ -160,7 +175,7 @@
             this.wfgAllData.Cursor = System.Windows.Forms.Cursors.Default;
             this.wfgAllData.Cursors.AddRange(new NationalInstruments.UI.XYCursor[] {
             this.xyCursor1});
-            this.wfgAllData.Location = new System.Drawing.Point(23, 467);
+            this.wfgAllData.Location = new System.Drawing.Point(23, 478);
             this.wfgAllData.Name = "wfgAllData";
             this.wfgAllData.Plots.AddRange(new NationalInstruments.UI.WaveformPlot[] {
             this.waveformPlot2});
@@ -171,6 +186,7 @@
             this.xAxis2});
             this.wfgAllData.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
             this.yAxis2});
+            this.wfgAllData.PlotAreaMouseMove += new System.Windows.Forms.MouseEventHandler(this.wfgAllData_PlotAreaMouseMove);
             this.wfgAllData.PlotAreaMouseUp += new System.Windows.Forms.MouseEventHandler(this.wfgAllData_PlotAreaMouseUp);
             // 
             // xyCursor1
@@ -186,11 +202,11 @@
             // 
             // wfgChartIntended
             // 
-            this.wfgChartIntended.Location = new System.Drawing.Point(23, 39);
+            this.wfgChartIntended.Location = new System.Drawing.Point(23, 87);
             this.wfgChartIntended.Name = "wfgChartIntended";
             this.wfgChartIntended.Plots.AddRange(new NationalInstruments.UI.WaveformPlot[] {
             this.Plot1});
-            this.wfgChartIntended.Size = new System.Drawing.Size(1453, 409);
+            this.wfgChartIntended.Size = new System.Drawing.Size(1453, 378);
             this.wfgChartIntended.TabIndex = 4;
             this.wfgChartIntended.UseColorGenerator = true;
             this.wfgChartIntended.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -211,16 +227,12 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.groupBox4);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.lblSizeData);
-            this.groupBox2.Controls.Add(this.lblNameFile);
-            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.tvFileName);
             this.groupBox2.Controls.Add(this.btnClear);
             this.groupBox2.Controls.Add(this.btnChoose);
-            this.groupBox2.Location = new System.Drawing.Point(7, 26);
+            this.groupBox2.Location = new System.Drawing.Point(6, 18);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(287, 948);
+            this.groupBox2.Size = new System.Drawing.Size(278, 611);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Open File";
@@ -230,7 +242,7 @@
             this.groupBox4.Controls.Add(this.rdless);
             this.groupBox4.Controls.Add(this.rdHalf);
             this.groupBox4.Controls.Add(this.rdFull);
-            this.groupBox4.Location = new System.Drawing.Point(6, 208);
+            this.groupBox4.Location = new System.Drawing.Point(23, 21);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(264, 60);
             this.groupBox4.TabIndex = 2;
@@ -272,48 +284,12 @@
             this.rdFull.UseVisualStyleBackColor = true;
             this.rdFull.CheckedChanged += new System.EventHandler(this.rdFull_CheckedChanged);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 173);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(39, 16);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Size :";
-            // 
-            // lblSizeData
-            // 
-            this.lblSizeData.AutoSize = true;
-            this.lblSizeData.Location = new System.Drawing.Point(66, 173);
-            this.lblSizeData.Name = "lblSizeData";
-            this.lblSizeData.Size = new System.Drawing.Size(34, 16);
-            this.lblSizeData.TabIndex = 1;
-            this.lblSizeData.Text = "0MB";
-            // 
-            // lblNameFile
-            // 
-            this.lblNameFile.AutoSize = true;
-            this.lblNameFile.Location = new System.Drawing.Point(23, 138);
-            this.lblNameFile.Name = "lblNameFile";
-            this.lblNameFile.Size = new System.Drawing.Size(64, 16);
-            this.lblNameFile.TabIndex = 1;
-            this.lblNameFile.Text = "Choosing";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 114);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 16);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Name File :";
-            // 
             // btnClear
             // 
             this.btnClear.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClear.Location = new System.Drawing.Point(26, 78);
+            this.btnClear.Location = new System.Drawing.Point(144, 33);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(79, 33);
+            this.btnClear.Size = new System.Drawing.Size(123, 33);
             this.btnClear.TabIndex = 1;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
@@ -322,28 +298,124 @@
             // btnChoose
             // 
             this.btnChoose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnChoose.Location = new System.Drawing.Point(26, 39);
+            this.btnChoose.Location = new System.Drawing.Point(15, 33);
             this.btnChoose.Name = "btnChoose";
-            this.btnChoose.Size = new System.Drawing.Size(79, 33);
+            this.btnChoose.Size = new System.Drawing.Size(123, 33);
             this.btnChoose.TabIndex = 0;
             this.btnChoose.Text = "Choose";
             this.btnChoose.UseVisualStyleBackColor = true;
             this.btnChoose.Click += new System.EventHandler(this.btnChoose_Click);
             // 
+            // tvFileName
+            // 
+            this.tvFileName.AllowDrop = true;
+            this.tvFileName.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.tvFileName.Location = new System.Drawing.Point(8, 86);
+            this.tvFileName.Name = "tvFileName";
+            this.tvFileName.ShowNodeToolTips = true;
+            this.tvFileName.Size = new System.Drawing.Size(264, 511);
+            this.tvFileName.TabIndex = 3;
+            // 
+            // btnMenuTreeView
+            // 
+            this.btnMenuTreeView.Name = "btnMenuTreeView";
+            this.btnMenuTreeView.Size = new System.Drawing.Size(180, 22);
+            this.btnMenuTreeView.Text = "TreeView";
+            this.btnMenuTreeView.Click += new System.EventHandler(this.btnMenuTreeView_Click);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.lblRangeData);
+            this.groupBox5.Controls.Add(this.label3);
+            this.groupBox5.Controls.Add(this.label2);
+            this.groupBox5.Controls.Add(this.lblLengthData);
+            this.groupBox5.Controls.Add(this.label1);
+            this.groupBox5.Controls.Add(this.lblCurser);
+            this.groupBox5.Location = new System.Drawing.Point(294, 21);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(563, 60);
+            this.groupBox5.TabIndex = 5;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Data";
+            // 
+            // lblCurser
+            // 
+            this.lblCurser.AutoSize = true;
+            this.lblCurser.Location = new System.Drawing.Point(74, 26);
+            this.lblCurser.Name = "lblCurser";
+            this.lblCurser.Size = new System.Drawing.Size(14, 16);
+            this.lblCurser.TabIndex = 0;
+            this.lblCurser.Text = "0";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(11, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 16);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "XCurser : ";
+            // 
+            // lblLengthData
+            // 
+            this.lblLengthData.AutoSize = true;
+            this.lblLengthData.Location = new System.Drawing.Point(236, 26);
+            this.lblLengthData.Name = "lblLengthData";
+            this.lblLengthData.Size = new System.Drawing.Size(14, 16);
+            this.lblLengthData.TabIndex = 1;
+            this.lblLengthData.Text = "0";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(151, 26);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(82, 16);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "LengthData :";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(344, 26);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(118, 16);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Range View Data :";
+            // 
+            // lblRangeData
+            // 
+            this.lblRangeData.AutoSize = true;
+            this.lblRangeData.Location = new System.Drawing.Point(468, 26);
+            this.lblRangeData.Name = "lblRangeData";
+            this.lblRangeData.Size = new System.Drawing.Size(31, 16);
+            this.lblRangeData.TabIndex = 2;
+            this.lblRangeData.Text = "0 - 0";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            // 
+            // btnMenuExit
+            // 
+            this.btnMenuExit.Name = "btnMenuExit";
+            this.btnMenuExit.Size = new System.Drawing.Size(180, 22);
+            this.btnMenuExit.Text = "Exit";
+            this.btnMenuExit.Click += new System.EventHandler(this.btnMenuExit_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.ClientSize = new System.Drawing.Size(1820, 709);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Drawing";
+            this.Text = "Graph";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
@@ -354,9 +426,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.xyCursor1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.wfgChartIntended)).EndInit();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -373,8 +446,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnChoose;
         private System.Windows.Forms.ToolStripMenuItem btnMenuOpenFile;
@@ -383,8 +454,6 @@
         private System.Windows.Forms.RadioButton rdless;
         private System.Windows.Forms.RadioButton rdHalf;
         private System.Windows.Forms.RadioButton rdFull;
-        public System.Windows.Forms.Label lblSizeData;
-        public System.Windows.Forms.Label lblNameFile;
         private NationalInstruments.UI.WaveformPlot Plot1;
         private NationalInstruments.UI.XAxis xAxis1;
         private NationalInstruments.UI.YAxis yAxis1;
@@ -394,6 +463,17 @@
         private NationalInstruments.UI.XAxis xAxis2;
         private NationalInstruments.UI.YAxis yAxis2;
         private NationalInstruments.UI.XYCursor xyCursor1;
+        private System.Windows.Forms.TreeView tvFileName;
+        private System.Windows.Forms.ToolStripMenuItem btnMenuTreeView;
+        private System.Windows.Forms.GroupBox groupBox5;
+        public System.Windows.Forms.Label lblCurser;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblLengthData;
+        private System.Windows.Forms.Label label3;
+        public System.Windows.Forms.Label lblRangeData;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem btnMenuExit;
     }
 }
 
