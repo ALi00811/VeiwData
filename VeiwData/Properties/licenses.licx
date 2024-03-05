@@ -1,3 +1,4 @@
 NationalInstruments.UI.WindowsForms.ToolStripPropertyEditor, NationalInstruments.UI.WindowsForms, Version=19.0.40.49154, Culture=neutral, PublicKeyToken=dc6ad606294fc298
-NationalInstruments.UI.WindowsForms.ComplexGraph, NationalInstruments.UI.WindowsForms, Version=19.0.40.49154, Culture=neutral, PublicKeyToken=dc6ad606294fc298
+NationalInstruments.UI.WindowsForms.InstrumentControlStrip, NationalInstruments.UI.WindowsForms, Version=19.0.40.49154, Culture=neutral, PublicKeyToken=dc6ad606294fc298
 NationalInstruments.UI.WindowsForms.WaveformGraph, NationalInstruments.UI.WindowsForms, Version=19.0.40.49154, Culture=neutral, PublicKeyToken=dc6ad606294fc298
+NationalInstruments.UI.WindowsForms.ComplexGraph, NationalInstruments.UI.WindowsForms, Version=19.0.40.49154, Culture=neutral, PublicKeyToken=dc6ad606294fc298

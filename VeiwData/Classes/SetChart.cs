@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NationalInstruments.UI;
+using System;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -28,21 +29,22 @@ namespace VeiwData.Classes
             openForms.wfgAllData.Plots[0].PlotY(allData);
             openForms.scrollBar = new ScroolBar();
         }
-        public void DrawingIntendedData(short[] dataChart, int perecentIntended)
+        public void DrawingIntendedData(short[] dataChart, double perecentIntended, int withScreen)
         {
             switch (perecentIntended)
             {
-                case 1:
+                case 8:
                     openForms.wfgChartIntended.Plots[0].PlotY(allData);
+                    openForms.wfgChartIntended.XAxes[0].Range = new Range(0, withScreen);
                     break;
 
-                case 2:
+                default:
+                    openForms.wfgChartIntended.XAxes[0].Range = new Range(0, dataChart.Length);
+                    openForms.wfgChartIntended.YAxes[0].Range = new Range(Int16.MinValue, Int16.MaxValue);
                     DrawingChart(dataChart);
+
                     break;
 
-                case 3:
-                    DrawingChart(dataChart);
-                    break;
 
             }
         }
@@ -51,6 +53,9 @@ namespace VeiwData.Classes
             dataIntended = new double[data.Length];
             Array.Copy(data, 0, dataIntended, 0, data.Length);
             openForms.wfgChartIntended.Plots[0].PlotY(dataIntended);
+            openForms.wfgChartIntended.InteractionModeDefault = GraphDefaultInteractionMode.ZoomX;
+            
+
         }
     }
 }

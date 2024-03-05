@@ -1,7 +1,9 @@
 ﻿using NationalInstruments.UI;
 using NationalInstruments.UI.WindowsForms;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 using VeiwData.Classes;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -24,13 +26,20 @@ namespace VeiwData
         public int ValueScroll { get; set; }
 
         public ScroolBar scrollBar;
-
+        public double ValueZoom { get; set; }
+        List<double> ValuesZoom = new List<double>() { 2.5, 5, 7.5, 10, 20, 30, 50, 70, 100 };
+        SetIndexRange SIR = new SetIndexRange();
+        public int SelectIndexZoom { get; set; }
         public frmMain()
         {
             InitializeComponent();
             DisplayRange = 2;
             var resolotion = new Resolotion();
             WithScreen = resolotion.Width;
+            cbZoom.SelectedIndex = 6;
+            ValueZoom = ValuesZoom[cbZoom.SelectedIndex];
+            SelectIndexZoom = cbZoom.SelectedIndex;
+            IndexSpace = SIR.GetIndexRange(ValueZoom, WithScreen);
         }
 
         private void btnChoose_Click(object sender, EventArgs e)
@@ -104,9 +113,8 @@ namespace VeiwData
             {
                 try
                 {
-                    GetX(e);
+                    GetX(wfgAllData, e);
                     DataPoint();
-
                 }
                 catch (Exception ex)
                 {
@@ -115,14 +123,14 @@ namespace VeiwData
             }
         }
 
-        private void GetX(System.Windows.Forms.MouseEventArgs e)
+        private void GetX(WaveformGraph wfa, System.Windows.Forms.MouseEventArgs e)
         {
 
             p = new Point(e.X, e.Y);
             lblCurser.Text = e.X.ToString();
 
-            wfgAllData.Plots[0].InverseMapDataPoint(wfgAllData.PlotAreaBounds, p, out xData, out yData);
-            wfgAllData.Cursors[0].XPosition = xData;
+            wfa.Plots[0].InverseMapDataPoint(wfa.PlotAreaBounds, p, out xData, out yData);
+            //wfa.Cursors[0].XPosition = xData;
 
             xData = (int)(Math.Abs(xData));
         }
@@ -133,7 +141,7 @@ namespace VeiwData
             {
                 try
                 {
-                    GetX(e);
+                    GetX(wfgAllData, e);
                     DataPoint();
                     ValueScroll = e.X;
 
@@ -173,21 +181,30 @@ namespace VeiwData
             xData = sbChart.Value;
             DataPoint();
         }
-        
+
+        private void cbZoom_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Access)
+            {
+                ValueZoom = ValuesZoom[cbZoom.SelectedIndex];
+                SelectIndexZoom = cbZoom.SelectedIndex;
+                IndexSpace = SIR.GetIndexRange(ValueZoom, WithScreen);
+                DataPoint();
+            }
+        }
+
         private void DataPoint()
         {
 
-            if (DisplayRange != 1)
+            if (SelectIndexZoom != 8)
             {
-                IndexSpace = DisplayRange == 2 ? WithScreen * 0.5 : WithScreen * 0.1;
                 var start = (int)xData - ((int)IndexSpace / 2);
                 var end = (int)xData + ((int)IndexSpace / 2);
                 start = start <= 0 ? 0 : start;
                 lblRangeData.Text = $"{start} - {end}";
-                DataIntended = Da.GetData(false, start, (long)IndexSpace, end);                
+                DataIntended = Da.GetData(false, start, (long)IndexSpace, end);
             }
-            setchart.DrawingIntendedData(DataIntended, DisplayRange);
-
+            setchart.DrawingIntendedData(DataIntended, SelectIndexZoom, WithScreen * 2);
         }
     }
 }

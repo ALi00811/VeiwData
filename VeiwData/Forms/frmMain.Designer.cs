@@ -55,9 +55,6 @@
             this.xAxis2 = new NationalInstruments.UI.XAxis();
             this.yAxis2 = new NationalInstruments.UI.YAxis();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.rdless = new System.Windows.Forms.RadioButton();
-            this.rdHalf = new System.Windows.Forms.RadioButton();
-            this.rdFull = new System.Windows.Forms.RadioButton();
             this.wfgChartIntended = new NationalInstruments.UI.WindowsForms.WaveformGraph();
             this.Plot1 = new NationalInstruments.UI.WaveformPlot();
             this.xAxis1 = new NationalInstruments.UI.XAxis();
@@ -66,6 +63,7 @@
             this.tvFileName = new System.Windows.Forms.TreeView();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnChoose = new System.Windows.Forms.Button();
+            this.cbZoom = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -208,7 +206,7 @@
             this.groupBox5.Controls.Add(this.lblLengthData);
             this.groupBox5.Controls.Add(this.label1);
             this.groupBox5.Controls.Add(this.lblCurser);
-            this.groupBox5.Location = new System.Drawing.Point(322, 15);
+            this.groupBox5.Location = new System.Drawing.Point(248, 15);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(643, 60);
             this.groupBox5.TabIndex = 5;
@@ -271,6 +269,8 @@
             // 
             // wfgAllData
             // 
+            this.wfgAllData.Border = NationalInstruments.UI.Border.Raised;
+            this.wfgAllData.CanShowFocus = true;
             this.wfgAllData.Cursor = System.Windows.Forms.Cursors.Default;
             this.wfgAllData.Cursors.AddRange(new NationalInstruments.UI.XYCursor[] {
             this.CursorSing});
@@ -294,81 +294,53 @@
             // 
             // waveformPlot2
             // 
-            this.waveformPlot2.LineStep = NationalInstruments.UI.LineStep.CenteredXYStep;
             this.waveformPlot2.XAxis = this.xAxis2;
             this.waveformPlot2.YAxis = this.yAxis2;
             // 
+            // xAxis2
+            // 
+            this.xAxis2.Mode = NationalInstruments.UI.AxisMode.ScopeChart;
+            // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.rdless);
-            this.groupBox4.Controls.Add(this.rdHalf);
-            this.groupBox4.Controls.Add(this.rdFull);
+            this.groupBox4.Controls.Add(this.cbZoom);
             this.groupBox4.Location = new System.Drawing.Point(51, 15);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(264, 60);
+            this.groupBox4.Size = new System.Drawing.Size(191, 60);
             this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Display percentage";
             // 
-            // rdless
-            // 
-            this.rdless.AutoSize = true;
-            this.rdless.Location = new System.Drawing.Point(160, 24);
-            this.rdless.Name = "rdless";
-            this.rdless.Size = new System.Drawing.Size(51, 20);
-            this.rdless.TabIndex = 1;
-            this.rdless.Text = "10%";
-            this.rdless.UseVisualStyleBackColor = true;
-            this.rdless.CheckedChanged += new System.EventHandler(this.rdless_CheckedChanged);
-            // 
-            // rdHalf
-            // 
-            this.rdHalf.AutoSize = true;
-            this.rdHalf.Checked = true;
-            this.rdHalf.Location = new System.Drawing.Point(91, 24);
-            this.rdHalf.Name = "rdHalf";
-            this.rdHalf.Size = new System.Drawing.Size(51, 20);
-            this.rdHalf.TabIndex = 1;
-            this.rdHalf.TabStop = true;
-            this.rdHalf.Text = "50%";
-            this.rdHalf.UseVisualStyleBackColor = true;
-            this.rdHalf.CheckedChanged += new System.EventHandler(this.rdHalf_CheckedChanged);
-            // 
-            // rdFull
-            // 
-            this.rdFull.AutoSize = true;
-            this.rdFull.Location = new System.Drawing.Point(12, 24);
-            this.rdFull.Name = "rdFull";
-            this.rdFull.Size = new System.Drawing.Size(58, 20);
-            this.rdFull.TabIndex = 1;
-            this.rdFull.Text = "100%";
-            this.rdFull.UseVisualStyleBackColor = true;
-            this.rdFull.CheckedChanged += new System.EventHandler(this.rdFull_CheckedChanged);
-            // 
             // wfgChartIntended
             // 
+            this.wfgChartIntended.InteractionMode = ((NationalInstruments.UI.GraphInteractionModes)((((NationalInstruments.UI.GraphInteractionModes.ZoomX | NationalInstruments.UI.GraphInteractionModes.ZoomY) 
+            | NationalInstruments.UI.GraphInteractionModes.ZoomAroundPoint) 
+            | NationalInstruments.UI.GraphInteractionModes.DragCursor)));
             this.wfgChartIntended.Location = new System.Drawing.Point(23, 101);
             this.wfgChartIntended.Name = "wfgChartIntended";
             this.wfgChartIntended.Plots.AddRange(new NationalInstruments.UI.WaveformPlot[] {
             this.Plot1});
             this.wfgChartIntended.Size = new System.Drawing.Size(1453, 394);
             this.wfgChartIntended.TabIndex = 4;
-            this.wfgChartIntended.UseColorGenerator = true;
             this.wfgChartIntended.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
             this.xAxis1});
             this.wfgChartIntended.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
             this.yAxis1});
+            this.wfgChartIntended.ZoomAnimation = false;
+            this.wfgChartIntended.ZoomFactor = 3F;
             // 
             // Plot1
             // 
-            this.Plot1.FillBase = NationalInstruments.UI.XYPlotFillBase.Plot;
-            this.Plot1.FillToBaseColor = System.Drawing.Color.Lime;
-            this.Plot1.FillToBaseStyle = NationalInstruments.UI.FillStyle.Shingle;
-            this.Plot1.LineStyle = NationalInstruments.UI.LineStyle.Dot;
-            this.Plot1.LineToBaseColor = System.Drawing.Color.Transparent;
-            this.Plot1.LineToBaseStyle = NationalInstruments.UI.LineStyle.Dash;
             this.Plot1.XAxis = this.xAxis1;
             this.Plot1.YAxis = this.yAxis1;
+            // 
+            // xAxis1
+            // 
+            this.xAxis1.Mode = NationalInstruments.UI.AxisMode.ScopeChart;
+            // 
+            // yAxis1
+            // 
+            this.yAxis1.Mode = NationalInstruments.UI.AxisMode.AutoScaleVisibleExact;
             // 
             // groupBox2
             // 
@@ -414,6 +386,26 @@
             this.btnChoose.UseVisualStyleBackColor = true;
             this.btnChoose.Click += new System.EventHandler(this.btnChoose_Click);
             // 
+            // cbZoom
+            // 
+            this.cbZoom.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cbZoom.FormattingEnabled = true;
+            this.cbZoom.Items.AddRange(new object[] {
+            "2.5%",
+            "5%",
+            "7.5%",
+            "10%",
+            "20%",
+            "30%",
+            "50%",
+            "70%",
+            "FIT"});
+            this.cbZoom.Location = new System.Drawing.Point(17, 26);
+            this.cbZoom.Name = "cbZoom";
+            this.cbZoom.Size = new System.Drawing.Size(155, 24);
+            this.cbZoom.TabIndex = 7;
+            this.cbZoom.SelectedIndexChanged += new System.EventHandler(this.cbZoom_SelectedIndexChanged);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -437,7 +429,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.wfgAllData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CursorSing)).EndInit();
             this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.wfgChartIntended)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -461,9 +452,6 @@
         private System.Windows.Forms.ToolStripMenuItem btnMenuOpenFile;
         private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.RadioButton rdless;
-        private System.Windows.Forms.RadioButton rdHalf;
-        private System.Windows.Forms.RadioButton rdFull;
         private NationalInstruments.UI.WaveformPlot Plot1;
         private NationalInstruments.UI.XAxis xAxis1;
         private NationalInstruments.UI.YAxis yAxis1;
@@ -485,6 +473,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem btnMenuExit;
         public System.Windows.Forms.HScrollBar sbChart;
+        public System.Windows.Forms.ComboBox cbZoom;
     }
 }
 

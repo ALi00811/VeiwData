@@ -1,5 +1,8 @@
-﻿using System;
+﻿using NationalInstruments.UI;
+using System;
 using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace VeiwData.Classes
 {
@@ -11,12 +14,15 @@ namespace VeiwData.Classes
         short[] Data { get; set; }
         long dataLengthOrg = 0;
         long step = 0;
+        int withScreen = 0;
         #endregion
+        frmMain openForms = Application.OpenForms.Cast<frmMain>().FirstOrDefault();
 
-        public Dataloading(FileStream fileStream, int withScreen, long filelength)
+        public Dataloading(FileStream fileStream, int withscreen, long filelength)
         {
             FileStream = fileStream;
             FileStreamIntended = fileStream;
+            withScreen = withscreen;
             dataLengthOrg = withScreen * 2;
 
             step = filelength / dataLengthOrg;
@@ -35,7 +41,8 @@ namespace VeiwData.Classes
                     FileStream.Read(buff, 0, 2);
                     Data[i] = BitConverter.ToInt16(buff, 0);
                 }
-
+                
+                openForms.wfgAllData.XAxes[0].Range = new Range(0, withScreen * 2);
                 return Data;
             }
             else
@@ -51,8 +58,6 @@ namespace VeiwData.Classes
                     DataIntended[indexCount] = BitConverter.ToInt16(buff, 0);
                     indexCount++;
                 }
-
-
                 return DataIntended;
             }
         }

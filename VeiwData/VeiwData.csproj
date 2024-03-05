@@ -58,6 +58,7 @@
     <Compile Include="Classes\Resolotion.cs" />
     <Compile Include="Classes\ScroolBar.cs" />
     <Compile Include="Classes\SetChart.cs" />
+    <Compile Include="Classes\SetIndexRange.cs" />
     <Compile Include="Forms\frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
