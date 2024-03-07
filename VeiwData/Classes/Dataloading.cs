@@ -23,8 +23,8 @@ namespace VeiwData.Classes
             FileStream = fileStream;
             FileStreamIntended = fileStream;
             withScreen = withscreen;
-            dataLengthOrg = withScreen * 2;
 
+            dataLengthOrg = withScreen * 2;
             step = filelength / dataLengthOrg;
         }
 
@@ -41,7 +41,6 @@ namespace VeiwData.Classes
                     FileStream.Read(buff, 0, 2);
                     Data[i] = BitConverter.ToInt16(buff, 0);
                 }
-                
                 openForms.wfgAllData.XAxes[0].Range = new Range(0, withScreen * 2);
                 return Data;
             }
@@ -51,6 +50,7 @@ namespace VeiwData.Classes
                 byte[] buff = new byte[2];
                 int indexCount = 0;
                 int i = startIndex;
+
                 FileStreamIntended.Seek(startIndex, SeekOrigin.Begin);
                 for (; i < end; i++)
                 {

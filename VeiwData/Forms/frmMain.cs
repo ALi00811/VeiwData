@@ -15,21 +15,22 @@ namespace VeiwData
     {
         Dataloading Da;
         SetChart setchart;
+        List<double> ValuesZoom = new List<double>() { 2.5, 5, 7.5, 10, 20, 30, 50, 70, 100 };
+        SetIndexRange SIR = new SetIndexRange();
+        public ScroolBar scrollBar;
+        Point p;
         public int DisplayRange { get; set; }
         public bool Access { get; set; }
         public double IndexSpace { get; set; }
         double xData, yData = 0;
         public int WithScreen { get; set; }
         public short[] DataIntended { get; set; }
-        Point p;
         public int maximumValueScroll { get; set; }
         public int ValueScroll { get; set; }
-
-        public ScroolBar scrollBar;
         public double ValueZoom { get; set; }
-        List<double> ValuesZoom = new List<double>() { 2.5, 5, 7.5, 10, 20, 30, 50, 70, 100 };
-        SetIndexRange SIR = new SetIndexRange();
         public int SelectIndexZoom { get; set; }
+        
+        
         public frmMain()
         {
             InitializeComponent();
@@ -52,11 +53,11 @@ namespace VeiwData
             wfgAllData.Plots[0].PlotY(0);
             wfgChartIntended.Plots[0].PlotY(0);
             Access = false;
+            sbChart.Visible = false;
             tvFileName.Nodes.Clear();
             sbChart.Maximum = 0;
             sbChart.Value = 0;
             sbChart.LargeChange = 0;
-            sbChart.Visible = false;
             ValueScroll = 0;
             ValueScroll = 0;
         }
@@ -80,33 +81,19 @@ namespace VeiwData
             {
                 maximumValueScroll = (int)Result.Item2;
                 Da = new Dataloading(Result.Item1, WithScreen, Result.Item2);
+
                 setchart = new SetChart(Da.GetData(true));
+
+                lblLengthData.Text = Result.Item2.ToString("#,0");
 
                 tvFileName.Nodes.Add(Result.Item3.ToString());
                 tvFileName.Nodes[0].Nodes.Add($"Size : {Result.Item2.ToString("#,0")}kb");
-                lblLengthData.Text = Result.Item2.ToString("#,0");
                 tvFileName.Nodes[0].Nodes.Add(Result.Item1.Position.ToString());
                 tvFileName.Nodes[0].Nodes.Add(Result.Item1.SafeFileHandle.ToString());
+                
                 tvFileName.ExpandAll();
-
             }
         }
-
-        private void rdFull_CheckedChanged(object sender, EventArgs e)
-        {
-            DisplayRange = 1;
-        }
-
-        private void rdHalf_CheckedChanged(object sender, EventArgs e)
-        {
-            DisplayRange = 2;
-        }
-
-        private void rdless_CheckedChanged(object sender, EventArgs e)
-        {
-            DisplayRange = 3;
-        }
-
         private void wfgAllData_PlotAreaMouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if (Access)
@@ -125,13 +112,10 @@ namespace VeiwData
 
         private void GetX(WaveformGraph wfa, System.Windows.Forms.MouseEventArgs e)
         {
-
             p = new Point(e.X, e.Y);
             lblCurser.Text = e.X.ToString();
 
             wfa.Plots[0].InverseMapDataPoint(wfa.PlotAreaBounds, p, out xData, out yData);
-            //wfa.Cursors[0].XPosition = xData;
-
             xData = (int)(Math.Abs(xData));
         }
 
@@ -167,8 +151,7 @@ namespace VeiwData
 
         private void btnMenuExit_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Close The Window ?", "Exit!!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                Application.Exit();
+            if (MessageBox.Show("Close The Window ?", "Exit!!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes) Application.Exit();
         }
 
         private void clearToolStripMenuItem_Click(object sender, EventArgs e)
@@ -188,6 +171,7 @@ namespace VeiwData
             {
                 ValueZoom = ValuesZoom[cbZoom.SelectedIndex];
                 SelectIndexZoom = cbZoom.SelectedIndex;
+
                 IndexSpace = SIR.GetIndexRange(ValueZoom, WithScreen);
                 DataPoint();
             }
@@ -200,8 +184,13 @@ namespace VeiwData
             {
                 var start = (int)xData - ((int)IndexSpace / 2);
                 var end = (int)xData + ((int)IndexSpace / 2);
+
                 start = start <= 0 ? 0 : start;
+
                 lblRangeData.Text = $"{start} - {end}";
+                lblIndex.Text = xData.ToString();
+
+                //wfgChartIntended.XAxes[0].Range = new Range(start,end);
                 DataIntended = Da.GetData(false, start, (long)IndexSpace, end);
             }
             setchart.DrawingIntendedData(DataIntended, SelectIndexZoom, WithScreen * 2);

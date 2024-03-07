@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.btnMenuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.btnMenuOpenFile = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,7 +44,9 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.sbChart = new System.Windows.Forms.HScrollBar();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.lblIndex = new System.Windows.Forms.Label();
             this.lblRangeData = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblLengthData = new System.Windows.Forms.Label();
@@ -55,6 +58,7 @@
             this.xAxis2 = new NationalInstruments.UI.XAxis();
             this.yAxis2 = new NationalInstruments.UI.YAxis();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.cbZoom = new System.Windows.Forms.ComboBox();
             this.wfgChartIntended = new NationalInstruments.UI.WindowsForms.WaveformGraph();
             this.Plot1 = new NationalInstruments.UI.WaveformPlot();
             this.xAxis1 = new NationalInstruments.UI.XAxis();
@@ -63,7 +67,6 @@
             this.tvFileName = new System.Windows.Forms.TreeView();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnChoose = new System.Windows.Forms.Button();
-            this.cbZoom = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -200,7 +203,9 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.lblIndex);
             this.groupBox5.Controls.Add(this.lblRangeData);
+            this.groupBox5.Controls.Add(this.label4);
             this.groupBox5.Controls.Add(this.label3);
             this.groupBox5.Controls.Add(this.label2);
             this.groupBox5.Controls.Add(this.lblLengthData);
@@ -208,10 +213,19 @@
             this.groupBox5.Controls.Add(this.lblCurser);
             this.groupBox5.Location = new System.Drawing.Point(248, 15);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(643, 60);
+            this.groupBox5.Size = new System.Drawing.Size(930, 60);
             this.groupBox5.TabIndex = 5;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Data";
+            // 
+            // lblIndex
+            // 
+            this.lblIndex.AutoSize = true;
+            this.lblIndex.Location = new System.Drawing.Point(719, 26);
+            this.lblIndex.Name = "lblIndex";
+            this.lblIndex.Size = new System.Drawing.Size(14, 16);
+            this.lblIndex.TabIndex = 2;
+            this.lblIndex.Text = "0";
             // 
             // lblRangeData
             // 
@@ -221,6 +235,15 @@
             this.lblRangeData.Size = new System.Drawing.Size(31, 16);
             this.lblRangeData.TabIndex = 2;
             this.lblRangeData.Text = "0 - 0";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(663, 26);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(45, 16);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Index :";
             // 
             // label3
             // 
@@ -311,6 +334,26 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Display percentage";
             // 
+            // cbZoom
+            // 
+            this.cbZoom.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.cbZoom.FormattingEnabled = true;
+            this.cbZoom.Items.AddRange(new object[] {
+            "2.5%",
+            "5%",
+            "7.5%",
+            "10%",
+            "20%",
+            "30%",
+            "50%",
+            "70%",
+            "FIT"});
+            this.cbZoom.Location = new System.Drawing.Point(17, 26);
+            this.cbZoom.Name = "cbZoom";
+            this.cbZoom.Size = new System.Drawing.Size(155, 24);
+            this.cbZoom.TabIndex = 7;
+            this.cbZoom.SelectedIndexChanged += new System.EventHandler(this.cbZoom_SelectedIndexChanged);
+            // 
             // wfgChartIntended
             // 
             this.wfgChartIntended.InteractionMode = ((NationalInstruments.UI.GraphInteractionModes)((((NationalInstruments.UI.GraphInteractionModes.ZoomX | NationalInstruments.UI.GraphInteractionModes.ZoomY) 
@@ -386,26 +429,6 @@
             this.btnChoose.UseVisualStyleBackColor = true;
             this.btnChoose.Click += new System.EventHandler(this.btnChoose_Click);
             // 
-            // cbZoom
-            // 
-            this.cbZoom.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cbZoom.FormattingEnabled = true;
-            this.cbZoom.Items.AddRange(new object[] {
-            "2.5%",
-            "5%",
-            "7.5%",
-            "10%",
-            "20%",
-            "30%",
-            "50%",
-            "70%",
-            "FIT"});
-            this.cbZoom.Location = new System.Drawing.Point(17, 26);
-            this.cbZoom.Name = "cbZoom";
-            this.cbZoom.Size = new System.Drawing.Size(155, 24);
-            this.cbZoom.TabIndex = 7;
-            this.cbZoom.SelectedIndexChanged += new System.EventHandler(this.cbZoom_SelectedIndexChanged);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -414,6 +437,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -474,6 +498,8 @@
         private System.Windows.Forms.ToolStripMenuItem btnMenuExit;
         public System.Windows.Forms.HScrollBar sbChart;
         public System.Windows.Forms.ComboBox cbZoom;
+        public System.Windows.Forms.Label lblIndex;
+        private System.Windows.Forms.Label label4;
     }
 }
 
