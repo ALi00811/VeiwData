@@ -9,57 +9,39 @@ namespace VeiwData.Classes
     public class Dataloading
     {
         #region Properties
-        private FileStream FileStream { get; set; }
-        private FileStream FileStreamIntended { get; set; }
-        short[] Data { get; set; }
-        long dataLengthOrg = 0;
-        long step = 0;
-        int withScreen = 0;
+        long[] Y { get; set; }
+        long[] X { get; set; }
+        
+        byte[] buff;
         #endregion
-        frmMain openForms = Application.OpenForms.Cast<frmMain>().FirstOrDefault();
 
-        public Dataloading(FileStream fileStream, int withscreen, long filelength)
+        #region objects
+        private FileStream FileStream { get; set; }
+        #endregion
+
+        public Dataloading(FileStream fileStream)
         {
             FileStream = fileStream;
-            FileStreamIntended = fileStream;
-            withScreen = withscreen;
-
-            dataLengthOrg = withScreen * 2;
-            step = filelength / dataLengthOrg;
         }
-
-        public short[] GetData(bool getAllData,int startIndex = 0, long dataLength = 0, int end = 0)
+        #region GetData
+        public ReturnValues GetData(int startIndex, long dataLength, long step,int arrayLength)
         {
-            if (getAllData)
+            Y = new long[arrayLength];
+            X = new long[arrayLength];
+            buff = new byte[2];
+            var index = 0;
+            int i;
+            i = startIndex != 0 ? i = startIndex : i = 0;
+            for (; i < dataLength; i++)
             {
-                Data = new short[dataLengthOrg];
-                byte[] buff = new byte[2];
-
-                for (int i = 0; i < dataLengthOrg; i++)
-                {
-                    FileStream.Seek(i * step, SeekOrigin.Begin);
-                    FileStream.Read(buff, 0, 2);
-                    Data[i] = BitConverter.ToInt16(buff, 0);
-                }
-                openForms.wfgAllData.XAxes[0].Range = new Range(0, withScreen * 2);
-                return Data;
+                if (startIndex != 0) FileStream.Seek(startIndex, SeekOrigin.Begin); else FileStream.Seek(step * i, SeekOrigin.Begin);
+                FileStream.Read(buff, 0, 2);
+                Y[index] = BitConverter.ToInt16(buff, 0);
+                if (startIndex != 0) X[index] = index * step; else X[index] = index;
+                index++;
             }
-            else
-            {
-                short[] DataIntended = new short[dataLength + 1];
-                byte[] buff = new byte[2];
-                int indexCount = 0;
-                int i = startIndex;
-
-                FileStreamIntended.Seek(startIndex, SeekOrigin.Begin);
-                for (; i < end; i++)
-                {
-                    FileStreamIntended.Read(buff, 0, 2);
-                    DataIntended[indexCount] = BitConverter.ToInt16(buff, 0);
-                    indexCount++;
-                }
-                return DataIntended;
-            }
+            return new ReturnValues(X, Y);
         }
+        #endregion
     }
 }

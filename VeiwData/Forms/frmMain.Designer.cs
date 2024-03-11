@@ -42,6 +42,14 @@
             this.lblStatusProcessor = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.sgIntendedData = new NationalInstruments.UI.WindowsForms.ScatterGraph();
+            this.scatterPlot2 = new NationalInstruments.UI.ScatterPlot();
+            this.xAxis2 = new NationalInstruments.UI.XAxis();
+            this.yAxis2 = new NationalInstruments.UI.YAxis();
+            this.sgAllData = new NationalInstruments.UI.WindowsForms.ScatterGraph();
+            this.scatterPlot1 = new NationalInstruments.UI.ScatterPlot();
+            this.xAxis3 = new NationalInstruments.UI.XAxis();
+            this.yAxis3 = new NationalInstruments.UI.YAxis();
             this.sbChart = new System.Windows.Forms.HScrollBar();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.lblIndex = new System.Windows.Forms.Label();
@@ -52,17 +60,8 @@
             this.lblLengthData = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lblCurser = new System.Windows.Forms.Label();
-            this.wfgAllData = new NationalInstruments.UI.WindowsForms.WaveformGraph();
-            this.CursorSing = new NationalInstruments.UI.XYCursor();
-            this.waveformPlot2 = new NationalInstruments.UI.WaveformPlot();
-            this.xAxis2 = new NationalInstruments.UI.XAxis();
-            this.yAxis2 = new NationalInstruments.UI.YAxis();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.cbZoom = new System.Windows.Forms.ComboBox();
-            this.wfgChartIntended = new NationalInstruments.UI.WindowsForms.WaveformGraph();
-            this.Plot1 = new NationalInstruments.UI.WaveformPlot();
-            this.xAxis1 = new NationalInstruments.UI.XAxis();
-            this.yAxis1 = new NationalInstruments.UI.YAxis();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tvFileName = new System.Windows.Forms.TreeView();
             this.btnClear = new System.Windows.Forms.Button();
@@ -71,11 +70,10 @@
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sgIntendedData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sgAllData)).BeginInit();
             this.groupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.wfgAllData)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CursorSing)).BeginInit();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.wfgChartIntended)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -180,11 +178,11 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.sgIntendedData);
+            this.groupBox3.Controls.Add(this.sgAllData);
             this.groupBox3.Controls.Add(this.sbChart);
             this.groupBox3.Controls.Add(this.groupBox5);
-            this.groupBox3.Controls.Add(this.wfgAllData);
             this.groupBox3.Controls.Add(this.groupBox4);
-            this.groupBox3.Controls.Add(this.wfgChartIntended);
             this.groupBox3.Location = new System.Drawing.Point(290, 18);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(1500, 633);
@@ -192,9 +190,56 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Chart";
             // 
+            // sgIntendedData
+            // 
+            this.sgIntendedData.Location = new System.Drawing.Point(23, 102);
+            this.sgIntendedData.Name = "sgIntendedData";
+            this.sgIntendedData.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
+            this.scatterPlot2});
+            this.sgIntendedData.Size = new System.Drawing.Size(1453, 391);
+            this.sgIntendedData.TabIndex = 8;
+            this.sgIntendedData.UseColorGenerator = true;
+            this.sgIntendedData.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
+            this.xAxis2});
+            this.sgIntendedData.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
+            this.yAxis2});
+            // 
+            // scatterPlot2
+            // 
+            this.scatterPlot2.XAxis = this.xAxis2;
+            this.scatterPlot2.YAxis = this.yAxis2;
+            // 
+            // xAxis2
+            // 
+            this.xAxis2.Mode = NationalInstruments.UI.AxisMode.Fixed;
+            // 
+            // sgAllData
+            // 
+            this.sgAllData.Location = new System.Drawing.Point(23, 492);
+            this.sgAllData.Name = "sgAllData";
+            this.sgAllData.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
+            this.scatterPlot1});
+            this.sgAllData.Size = new System.Drawing.Size(1453, 135);
+            this.sgAllData.TabIndex = 7;
+            this.sgAllData.UseColorGenerator = true;
+            this.sgAllData.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
+            this.xAxis3});
+            this.sgAllData.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
+            this.yAxis3});
+            this.sgAllData.PlotAreaMouseUp += new System.Windows.Forms.MouseEventHandler(this.sgAllData_PlotAreaMouseUp);
+            // 
+            // scatterPlot1
+            // 
+            this.scatterPlot1.XAxis = this.xAxis3;
+            this.scatterPlot1.YAxis = this.yAxis3;
+            // 
+            // xAxis3
+            // 
+            this.xAxis3.Mode = NationalInstruments.UI.AxisMode.Fixed;
+            // 
             // sbChart
             // 
-            this.sbChart.Location = new System.Drawing.Point(37, 83);
+            this.sbChart.Location = new System.Drawing.Point(37, 78);
             this.sbChart.Name = "sbChart";
             this.sbChart.Size = new System.Drawing.Size(1425, 25);
             this.sbChart.TabIndex = 6;
@@ -290,40 +335,6 @@
             this.lblCurser.TabIndex = 0;
             this.lblCurser.Text = "0";
             // 
-            // wfgAllData
-            // 
-            this.wfgAllData.Border = NationalInstruments.UI.Border.Raised;
-            this.wfgAllData.CanShowFocus = true;
-            this.wfgAllData.Cursor = System.Windows.Forms.Cursors.Default;
-            this.wfgAllData.Cursors.AddRange(new NationalInstruments.UI.XYCursor[] {
-            this.CursorSing});
-            this.wfgAllData.Location = new System.Drawing.Point(23, 501);
-            this.wfgAllData.Name = "wfgAllData";
-            this.wfgAllData.Plots.AddRange(new NationalInstruments.UI.WaveformPlot[] {
-            this.waveformPlot2});
-            this.wfgAllData.Size = new System.Drawing.Size(1453, 119);
-            this.wfgAllData.TabIndex = 4;
-            this.wfgAllData.UseColorGenerator = true;
-            this.wfgAllData.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
-            this.xAxis2});
-            this.wfgAllData.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
-            this.yAxis2});
-            this.wfgAllData.PlotAreaMouseMove += new System.Windows.Forms.MouseEventHandler(this.wfgAllData_PlotAreaMouseMove);
-            this.wfgAllData.PlotAreaMouseUp += new System.Windows.Forms.MouseEventHandler(this.wfgAllData_PlotAreaMouseUp);
-            // 
-            // CursorSing
-            // 
-            this.CursorSing.Plot = this.waveformPlot2;
-            // 
-            // waveformPlot2
-            // 
-            this.waveformPlot2.XAxis = this.xAxis2;
-            this.waveformPlot2.YAxis = this.yAxis2;
-            // 
-            // xAxis2
-            // 
-            this.xAxis2.Mode = NationalInstruments.UI.AxisMode.ScopeChart;
-            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.cbZoom);
@@ -353,37 +364,6 @@
             this.cbZoom.Size = new System.Drawing.Size(155, 24);
             this.cbZoom.TabIndex = 7;
             this.cbZoom.SelectedIndexChanged += new System.EventHandler(this.cbZoom_SelectedIndexChanged);
-            // 
-            // wfgChartIntended
-            // 
-            this.wfgChartIntended.InteractionMode = ((NationalInstruments.UI.GraphInteractionModes)((((NationalInstruments.UI.GraphInteractionModes.ZoomX | NationalInstruments.UI.GraphInteractionModes.ZoomY) 
-            | NationalInstruments.UI.GraphInteractionModes.ZoomAroundPoint) 
-            | NationalInstruments.UI.GraphInteractionModes.DragCursor)));
-            this.wfgChartIntended.Location = new System.Drawing.Point(23, 101);
-            this.wfgChartIntended.Name = "wfgChartIntended";
-            this.wfgChartIntended.Plots.AddRange(new NationalInstruments.UI.WaveformPlot[] {
-            this.Plot1});
-            this.wfgChartIntended.Size = new System.Drawing.Size(1453, 394);
-            this.wfgChartIntended.TabIndex = 4;
-            this.wfgChartIntended.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
-            this.xAxis1});
-            this.wfgChartIntended.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
-            this.yAxis1});
-            this.wfgChartIntended.ZoomAnimation = false;
-            this.wfgChartIntended.ZoomFactor = 3F;
-            // 
-            // Plot1
-            // 
-            this.Plot1.XAxis = this.xAxis1;
-            this.Plot1.YAxis = this.yAxis1;
-            // 
-            // xAxis1
-            // 
-            this.xAxis1.Mode = NationalInstruments.UI.AxisMode.ScopeChart;
-            // 
-            // yAxis1
-            // 
-            this.yAxis1.Mode = NationalInstruments.UI.AxisMode.AutoScaleVisibleExact;
             // 
             // groupBox2
             // 
@@ -448,12 +428,11 @@
             this.statusStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.sgIntendedData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sgAllData)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.wfgAllData)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CursorSing)).EndInit();
             this.groupBox4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.wfgChartIntended)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -476,15 +455,6 @@
         private System.Windows.Forms.ToolStripMenuItem btnMenuOpenFile;
         private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox4;
-        private NationalInstruments.UI.WaveformPlot Plot1;
-        private NationalInstruments.UI.XAxis xAxis1;
-        private NationalInstruments.UI.YAxis yAxis1;
-        public NationalInstruments.UI.WindowsForms.WaveformGraph wfgChartIntended;
-        public NationalInstruments.UI.WindowsForms.WaveformGraph wfgAllData;
-        private NationalInstruments.UI.WaveformPlot waveformPlot2;
-        private NationalInstruments.UI.XAxis xAxis2;
-        private NationalInstruments.UI.YAxis yAxis2;
-        private NationalInstruments.UI.XYCursor CursorSing;
         private System.Windows.Forms.TreeView tvFileName;
         private System.Windows.Forms.ToolStripMenuItem btnMenuTreeView;
         private System.Windows.Forms.GroupBox groupBox5;
@@ -500,6 +470,14 @@
         public System.Windows.Forms.ComboBox cbZoom;
         public System.Windows.Forms.Label lblIndex;
         private System.Windows.Forms.Label label4;
+        private NationalInstruments.UI.ScatterPlot scatterPlot1;
+        private NationalInstruments.UI.XAxis xAxis3;
+        private NationalInstruments.UI.YAxis yAxis3;
+        public NationalInstruments.UI.WindowsForms.ScatterGraph sgAllData;
+        private NationalInstruments.UI.ScatterPlot scatterPlot2;
+        private NationalInstruments.UI.XAxis xAxis2;
+        private NationalInstruments.UI.YAxis yAxis2;
+        public NationalInstruments.UI.WindowsForms.ScatterGraph sgIntendedData;
     }
 }
 

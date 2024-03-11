@@ -78,6 +78,7 @@
   <ItemGroup>
     <Compile Include="Classes\Dataloading.cs" />
     <Compile Include="Classes\Resolotion.cs" />
+    <Compile Include="Classes\ReturnValues.cs" />
     <Compile Include="Classes\ScroolBar.cs" />
     <Compile Include="Classes\SetChart.cs" />
     <Compile Include="Classes\SetIndexRange.cs" />

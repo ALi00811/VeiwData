@@ -17,7 +17,7 @@ namespace VeiwData.Classes
             openForms.sbChart.Visible = true;
             openForms.sbChart.Minimum = 0;
             openForms.sbChart.LargeChange = openForms.WithScreen * 2;
-            openForms.sbChart.Maximum = openForms.maximumValueScroll;
+            openForms.sbChart.Maximum = openForms.MaximumValueScroll;
             openForms.sbChart.Value = openForms.ValueScroll;
 
             openForms.sbChart.ValueChanged += openForms.sbChart_ValueChanged;

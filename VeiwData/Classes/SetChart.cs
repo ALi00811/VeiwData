@@ -1,7 +1,6 @@
 ﻿using NationalInstruments.UI;
 using System;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -12,42 +11,48 @@ namespace VeiwData.Classes
     {
         #region Properties
         frmMain openForms = Application.OpenForms.Cast<frmMain>().FirstOrDefault();
-        private double[] allData;
-        private double[] dataIntended;
-
+        private double[] X, Y;
+        private double[] xDraw, yDraw;
         #endregion
 
-        public SetChart(short[] data)
+        public SetChart(long[] x, long[] y)
         {
-            allData = new double[data.Length];
-            Array.Copy(data, 0, allData, 0, data.Length);
-
-            openForms.wfgChartIntended.YAxes[0].Range = new Range(Int16.MinValue, Int16.MaxValue);
+            X = new double[x.Length];
+            Y = new double[y.Length];
+            Array.Copy(x, 0, X, 0, x.Length);
+            Array.Copy(y, 0, Y, 0, y.Length);
             DrawingAllData();
         }
+
         private void DrawingAllData()
         {
-            openForms.wfgAllData.Plots[0].PlotY(allData);
+            openForms.sgAllData.Plots[0].PlotXY(X, Y);
+            openForms.sgIntendedData.PlotXY(X, Y);
+            openForms.sgAllData.XAxes[0].Range = new Range(X[0], X[X.Length - 1]);
             openForms.scrollBar = new ScroolBar();
         }
-        public void DrawingIntendedData(short[] dataChart, double perecentIntended, int withScreen)
+
+        public void DrawingIntendedData(long[] x, long[] y, double perecentIntended)
         {
             switch (perecentIntended)
             {
                 case 8:
-                    openForms.wfgChartIntended.Plots[0].PlotY(allData);
+                    openForms.sgAllData.Plots[0].PlotXY(X, Y);
                     break;
 
                 default:
-                    DrawingChart(dataChart);
+                    DrawingChart(x, y);
                     break;
             }
         }
-        private void DrawingChart(short[] data)
+
+        private void DrawingChart(long[] x, long[] y)
         {
-            dataIntended = new double[data.Length];
-            Array.Copy(data, 0, dataIntended, 0, data.Length);
-            openForms.wfgChartIntended.Plots[0].PlotY(dataIntended);
+            xDraw = new double[x.Length];
+            yDraw = new double[y.Length];
+            Array.Copy(x, 0, xDraw, 0, x.Length);
+            Array.Copy(y, 0, yDraw, 0, y.Length);
+            openForms.sgIntendedData.Plots[0].PlotXY(xDraw, yDraw);
         }
     }
 }
