@@ -209,10 +209,6 @@
             this.scatterPlot2.XAxis = this.xAxis2;
             this.scatterPlot2.YAxis = this.yAxis2;
             // 
-            // xAxis2
-            // 
-            this.xAxis2.Mode = NationalInstruments.UI.AxisMode.Fixed;
-            // 
             // sgAllData
             // 
             this.sgAllData.Location = new System.Drawing.Point(23, 492);

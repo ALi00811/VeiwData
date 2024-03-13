@@ -31,13 +31,14 @@ namespace VeiwData.Classes
             buff = new byte[2];
             var index = 0;
             int i;
+            if (startIndex != 0) FileStream.Seek(startIndex, SeekOrigin.Begin);
             i = startIndex != 0 ? i = startIndex : i = 0;
             for (; i < dataLength; i++)
             {
-                if (startIndex != 0) FileStream.Seek(startIndex, SeekOrigin.Begin); else FileStream.Seek(step * i, SeekOrigin.Begin);
+                if (startIndex == 0) FileStream.Seek(step * i, SeekOrigin.Begin);
                 FileStream.Read(buff, 0, 2);
                 Y[index] = BitConverter.ToInt16(buff, 0);
-                if (startIndex != 0) X[index] = index * step; else X[index] = index;
+                X[index] = index * step; 
                 index++;
             }
             return new ReturnValues(X, Y);

@@ -85,7 +85,7 @@ namespace VeiwData
                 Da = new Dataloading(Result.Item1);
                 Step = Result.Item2 / (WithScreen * 2);
 
-                var item = Da.GetData(0, WithScreen * 2, Step,WithScreen * 2);
+                var item = Da.GetData(0, WithScreen * 2, Step, WithScreen * 2);
                 setchart = new SetChart(item.ItemX, item.ItemY);
 
                 lblLengthData.Text = Result.Item2.ToString("#,0");
@@ -178,8 +178,10 @@ namespace VeiwData
                 lblRangeData.Text = $"{start} - {end}";
                 lblIndex.Text = xData.ToString();
 
-                sgIntendedData.XAxes[0].Range = new Range(start, end);
-                DataIntended = Da.GetData(start, end, Step,WithScreen * 2);
+                //sgIntendedData.XAxes[0].Range = new Range(start, end);
+                DataIntended = Da.GetData(start, end, Step, WithScreen * 2);
+                //sgIntendedData.Plots[0].XAxis.Range = new Range(start, end);
+
             }
             setchart.DrawingIntendedData(DataIntended.ItemX, DataIntended.ItemY, SelectIndexZoom);
         }

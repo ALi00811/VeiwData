@@ -52,6 +52,7 @@ namespace VeiwData.Classes
             yDraw = new double[y.Length];
             Array.Copy(x, 0, xDraw, 0, x.Length);
             Array.Copy(y, 0, yDraw, 0, y.Length);
+            openForms.sgIntendedData.Plots[0].YAxis.Range = new Range(y.Min(), y.Max());
             openForms.sgIntendedData.Plots[0].PlotXY(xDraw, yDraw);
         }
     }
