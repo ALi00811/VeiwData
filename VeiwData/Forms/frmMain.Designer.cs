@@ -66,6 +66,10 @@
             this.tvFileName = new System.Windows.Forms.TreeView();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnChoose = new System.Windows.Forms.Button();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblSelector = new System.Windows.Forms.Label();
+            this.dgSelectSample = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -75,6 +79,9 @@
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgSelectSample)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -85,7 +92,7 @@
             this.btnMenuVeiw});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1820, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1828, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -152,9 +159,9 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblStatusProcessor});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 687);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 804);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1820, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1828, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -192,6 +199,7 @@
             // 
             // sgIntendedData
             // 
+            this.sgIntendedData.InteractionModeDefault = NationalInstruments.UI.GraphDefaultInteractionMode.PanX;
             this.sgIntendedData.Location = new System.Drawing.Point(23, 102);
             this.sgIntendedData.Name = "sgIntendedData";
             this.sgIntendedData.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
@@ -203,14 +211,22 @@
             this.xAxis2});
             this.sgIntendedData.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
             this.yAxis2});
+            this.sgIntendedData.InteractionHistoryCountChanged += new System.EventHandler(this.sgIntendedData_InteractionHistoryCountChanged);
             // 
             // scatterPlot2
             // 
             this.scatterPlot2.XAxis = this.xAxis2;
             this.scatterPlot2.YAxis = this.yAxis2;
             // 
+            // xAxis2
+            // 
+            this.xAxis2.InteractionMode = NationalInstruments.UI.ScaleInteractionMode.None;
+            this.xAxis2.OriginLineStyle = NationalInstruments.UI.LineStyle.Dot;
+            // 
             // sgAllData
             // 
+            this.sgAllData.InteractionMode = ((NationalInstruments.UI.GraphInteractionModes)(((NationalInstruments.UI.GraphInteractionModes.ZoomX | NationalInstruments.UI.GraphInteractionModes.ZoomY) 
+            | NationalInstruments.UI.GraphInteractionModes.ZoomAroundPoint)));
             this.sgAllData.Location = new System.Drawing.Point(23, 492);
             this.sgAllData.Name = "sgAllData";
             this.sgAllData.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
@@ -405,11 +421,57 @@
             this.btnChoose.UseVisualStyleBackColor = true;
             this.btnChoose.Click += new System.EventHandler(this.btnChoose_Click);
             // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.dgSelectSample);
+            this.groupBox6.Controls.Add(this.panel1);
+            this.groupBox6.Location = new System.Drawing.Point(13, 690);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(1803, 111);
+            this.groupBox6.TabIndex = 3;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Select";
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.panel1.Controls.Add(this.lblSelector);
+            this.panel1.Location = new System.Drawing.Point(602, 12);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(794, 93);
+            this.panel1.TabIndex = 0;
+            // 
+            // lblSelector
+            // 
+            this.lblSelector.AutoSize = true;
+            this.lblSelector.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSelector.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblSelector.Location = new System.Drawing.Point(340, 34);
+            this.lblSelector.Name = "lblSelector";
+            this.lblSelector.Size = new System.Drawing.Size(32, 33);
+            this.lblSelector.TabIndex = 0;
+            this.lblSelector.Text = "0";
+            // 
+            // dgSelectSample
+            // 
+            this.dgSelectSample.AllowUserToAddRows = false;
+            this.dgSelectSample.AllowUserToDeleteRows = false;
+            this.dgSelectSample.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.RaisedVertical;
+            this.dgSelectSample.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgSelectSample.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.dgSelectSample.Location = new System.Drawing.Point(1402, 12);
+            this.dgSelectSample.Name = "dgSelectSample";
+            this.dgSelectSample.ReadOnly = true;
+            this.dgSelectSample.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dgSelectSample.Size = new System.Drawing.Size(394, 93);
+            this.dgSelectSample.TabIndex = 1;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1820, 709);
+            this.ClientSize = new System.Drawing.Size(1828, 826);
+            this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -430,6 +492,10 @@
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgSelectSample)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -442,7 +508,6 @@
         private System.Windows.Forms.ToolStripMenuItem btnMenuEdit;
         private System.Windows.Forms.ToolStripMenuItem btnMenuVeiw;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel lblStatusProcessor;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -474,6 +539,11 @@
         private NationalInstruments.UI.XAxis xAxis2;
         private NationalInstruments.UI.YAxis yAxis2;
         public NationalInstruments.UI.WindowsForms.ScatterGraph sgIntendedData;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Panel panel1;
+        public System.Windows.Forms.Label lblSelector;
+        public System.Windows.Forms.DataGridView dgSelectSample;
+        public System.Windows.Forms.ToolStripStatusLabel lblStatusProcessor;
     }
 }
 

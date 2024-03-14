@@ -1,7 +1,10 @@
 ﻿using NationalInstruments.UI;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using VeiwData.Classes;
 
@@ -22,15 +25,22 @@ namespace VeiwData
         public int ValueScroll { get; set; }
         public double ValueZoom { get; set; }
         public int SelectIndexZoom { get; set; }
+        public int Start { get; private set; } = 0;
+        public int End { get; private set; } 
+        private int Length { get; set; }
+
         #endregion
 
         #region Model
+        Tuple<FileStream, long, string> Result;
         Dataloading Da;
         SetChart setchart;
         List<double> ValuesZoom = new List<double>() { 2.5, 5, 7.5, 10, 20, 30, 50, 70, 100 };
         SetIndexRange SIR = new SetIndexRange();
         public ScroolBar scrollBar;
         Point p;
+        DataTable dt;
+        
         #endregion
 
         public frmMain()
@@ -38,11 +48,12 @@ namespace VeiwData
             InitializeComponent();
             DisplayRange = 2;
             var resolotion = new Resolotion();
-            WithScreen = resolotion.Width;
+            WithScreen = resolotion.Width * 2;
             cbZoom.SelectedIndex = 6;
             ValueZoom = ValuesZoom[cbZoom.SelectedIndex];
             SelectIndexZoom = cbZoom.SelectedIndex;
             IndexSpace = SIR.GetIndexRange(ValueZoom, WithScreen);
+
         }
 
         private void btnChoose_Click(object sender, EventArgs e)
@@ -76,7 +87,7 @@ namespace VeiwData
 
         private void OpenOfd()
         {
-            var Result = OpenFile.Open();
+            Result = OpenFile.Open();
             if (!isAccess) Clear();
             isAccess = true;
             if (isAccess)
@@ -95,7 +106,12 @@ namespace VeiwData
                 tvFileName.Nodes[0].Nodes.Add(Result.Item1.Position.ToString());
                 tvFileName.Nodes[0].Nodes.Add(Result.Item1.SafeFileHandle.ToString());
 
+                End = (int)Result.Item2;
+                Length = End;
+
                 tvFileName.ExpandAll();
+                SourceDataGrade();
+
             }
         }
 
@@ -157,6 +173,7 @@ namespace VeiwData
                     GetX(e);
                     DataPoint();
                     ValueScroll = e.X;
+                    lblSelector.Text = xData.ToString();
                 }
                 catch (Exception ex)
                 {
@@ -170,20 +187,42 @@ namespace VeiwData
         {
             if (SelectIndexZoom != 8)
             {
-                var start = (int)xData - ((int)IndexSpace / 2);
-                var end = (int)xData + ((int)IndexSpace / 2);
+                Start = (int)xData - ((int)IndexSpace / 2);
+                End = (int)xData + ((int)IndexSpace / 2);
 
-                start = start <= 0 ? 0 : start;
+                Start = Start <= 0 ? 0 : Start;
 
-                lblRangeData.Text = $"{start} - {end}";
+                lblRangeData.Text = $"{Start} - {End}";
                 lblIndex.Text = xData.ToString();
 
-                //sgIntendedData.XAxes[0].Range = new Range(start, end);
-                DataIntended = Da.GetData(start, end, Step, WithScreen * 2);
-                //sgIntendedData.Plots[0].XAxis.Range = new Range(start, end);
+                Length = End - Start;
+                SourceDataGrade();
+                DataIntended = Da.GetData(Start, End, Step, WithScreen * 2);
+                sgIntendedData.Plots[0].XAxis.Range = new Range(Start, End);
 
             }
             setchart.DrawingIntendedData(DataIntended.ItemX, DataIntended.ItemY, SelectIndexZoom);
         }
+
+        private void sgIntendedData_InteractionHistoryCountChanged(object sender, EventArgs e)
+        {
+            var range = sgIntendedData.Plots[0].XAxis.Range;
+        }
+
+        private void SourceDataGrade()
+        {
+            dt = new DataTable();
+            dt.Columns.Add("Begin", typeof(int));
+            dt.Columns.Add("End", typeof(int));
+            dt.Columns.Add("Length", typeof(int));
+            dt.Columns.Add("LengthFile", typeof(string));
+            dt.Rows.Add(Start, End, Length, Result.Item2.ToString());
+
+            dgSelectSample.DataSource = dt;
+            dgSelectSample.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dt.Dispose();
+        }
     }
+
+
 }
