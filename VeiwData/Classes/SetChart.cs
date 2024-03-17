@@ -23,7 +23,7 @@ namespace VeiwData.Classes
             Array.Copy(x, 0, X, 0, x.Length);
             Array.Copy(y, 0, Y, 0, y.Length);
             DrawingAllData();
-            FFT();
+            
         }
 
         private void DrawingAllData()
@@ -61,14 +61,17 @@ namespace VeiwData.Classes
         }
         private void FFT()
         {
-            var xx = X.Length % 1024;
-            double[] FX = new double[1024];
+            var bandwith = X[X.Length - 1] - X[0];
+            var center = X[X.Length - 1] - bandwith / 2;
+
+            double[] FX = new double[256];
             for (int i = 0; i < FX.Length; i++)
             {
-                FX[i] = X[xx + i];
-
+                FX[i] = center - bandwith / 2 + (i * (bandwith / 256));
             }
             GetFFT fft = new GetFFT(Y, FX);
         }
     }
 }
+
+

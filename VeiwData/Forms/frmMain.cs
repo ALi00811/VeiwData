@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using VeiwData.Classes;
+using VeiwData.FFT;
 
 
 namespace VeiwData
@@ -31,6 +33,7 @@ namespace VeiwData
         #endregion
 
         #region Model
+        public Stopwatch Stopwatch = new Stopwatch();
         Tuple<FileStream, long, string> Result;
         Dataloading DL;
         SetChart setchart;
@@ -51,7 +54,6 @@ namespace VeiwData
             cbZoom.SelectedIndex = 8;
             ValueZoom = ValuesZoom[cbZoom.SelectedIndex];
             SelectIndexZoom = cbZoom.SelectedIndex;
-
         }
 
         private void btnChoose_Click(object sender, EventArgs e)
@@ -93,11 +95,12 @@ namespace VeiwData
                 MaximumValueScroll = (int)Result.Item2;
                 DL = new Dataloading(Result.Item1);
                 Step = Result.Item2 / (WithScreen * 2);
-
+                FFT(Result.Item1);
                 var item = DL.GetData(0, Step, WithScreen * 2);
                 setchart = new SetChart(item.ItemX, item.ItemY);
 
                 lblLengthData.Text = Result.Item2.ToString("#,0");
+                lblRangeData.Text = $"{1} - {Result.Item2}";
 
                 tvFileName.Nodes.Add(Result.Item3.ToString());
                 tvFileName.Nodes[0].Nodes.Add($"Size : {Result.Item2.ToString("#,0")}kb");
@@ -109,6 +112,9 @@ namespace VeiwData
 
                 tvFileName.ExpandAll();
                 SourceDataGride();
+
+                Stopwatch.Stop();
+                lblStatusProcessor.Text = $"Opened in {Stopwatch.Elapsed} Secend";
 
             }
         }
@@ -158,7 +164,6 @@ namespace VeiwData
                 SelectIndexZoom = cbZoom.SelectedIndex;
 
                 IndexSpace = SIR.GetIndexRange(ValueZoom, Step);
-                //DataPoint();
             }
         }
 
@@ -192,7 +197,7 @@ namespace VeiwData
                 DataIntended = DL.GetData(Start, End, WithScreen * 2);
                 RangePlot();
             }
-            
+
         }
 
         private void SourceDataGride()
@@ -213,25 +218,25 @@ namespace VeiwData
             switch (ValueZoom)
             {
                 case 2.5:
-                    sgIntendedData.Plots[0].XAxis.Range = new Range(Start, SetRange(ValueZoom,Start));
+                    sgIntendedData.Plots[0].XAxis.Range = new Range(Start, SetRange(ValueZoom, Start));
                     break;
                 case 5:
                     sgIntendedData.Plots[0].XAxis.Range = new Range(Start, SetRange(ValueZoom, Start));
                     break;
                 case 7.5:
-                    sgIntendedData.Plots[0].XAxis.Range = new Range(Start, SetRange(ValueZoom,Start));
+                    sgIntendedData.Plots[0].XAxis.Range = new Range(Start, SetRange(ValueZoom, Start));
                     break;
                 case 10:
-                    sgIntendedData.Plots[0].XAxis.Range = new Range(Start, SetRange(ValueZoom,Start));
+                    sgIntendedData.Plots[0].XAxis.Range = new Range(Start, SetRange(ValueZoom, Start));
                     break;
                 case 20:
-                    sgIntendedData.Plots[0].XAxis.Range = new Range(Start, SetRange(ValueZoom,Start));
+                    sgIntendedData.Plots[0].XAxis.Range = new Range(Start, SetRange(ValueZoom, Start));
                     break;
                 case 30:
-                    sgIntendedData.Plots[0].XAxis.Range = new Range(Start, SetRange(ValueZoom,Start));
+                    sgIntendedData.Plots[0].XAxis.Range = new Range(Start, SetRange(ValueZoom, Start));
                     break;
                 case 50:
-                    sgIntendedData.Plots[0].XAxis.Range = new Range(Start, SetRange(ValueZoom,Start));
+                    sgIntendedData.Plots[0].XAxis.Range = new Range(Start, SetRange(ValueZoom, Start));
                     break;
                 case 70:
                     break;
@@ -279,10 +284,10 @@ namespace VeiwData
         private int SetRange(double valueZoom, int start)
         {
             var result = start + SIR.GetIndexRange(ValueZoom, start);
-            if (Result.Item2 > result && start + SIR.GetIndexRange(ValueZoom,Result.Item2) < Result.Item2)
+            if (Result.Item2 > result && start + SIR.GetIndexRange(ValueZoom, Result.Item2) < Result.Item2)
             {
                 setchart.DrawingIntendedData(DataIntended.ItemX, DataIntended.ItemY, SelectIndexZoom);
-                
+
                 lblRangeData.Text = $"{Start} - {result}";
                 lblIndex.Text = xData.ToString();
 
@@ -294,6 +299,18 @@ namespace VeiwData
             {
                 return (int)Result.Item2;
             }
+        }
+
+        private void FFT(FileStream fileStream)
+        {
+            Dataloading DLFFT = new Dataloading(Result.Item1);
+            double[] YFT = new double[Result.Item2 / 100];
+            double[] XFT = new double[4096];
+            var result = DLFFT.GetData(0, 1, (int)Result.Item2 / 100);
+            Array.Copy(result.ItemY, 0, YFT, 0, YFT.Length);
+            Array.Copy(result.ItemX, 0, XFT, 0, 4096);
+            GetFFT GFT = new GetFFT(YFT, XFT);
+
         }
     }
 
