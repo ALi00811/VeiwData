@@ -11,7 +11,7 @@ namespace VeiwData.Classes
         #region Properties
         long[] Y { get; set; }
         long[] X { get; set; }
-        
+
         byte[] buff;
         #endregion
 
@@ -24,24 +24,21 @@ namespace VeiwData.Classes
             FileStream = fileStream;
         }
         #region GetData
-        public ReturnValues GetData(int startIndex, long dataLength, long step,int arrayLength)
+        public ClassDatas GetData(int startIndex, long step, int arrayLength)
         {
             Y = new long[arrayLength];
             X = new long[arrayLength];
             buff = new byte[2];
-            var index = 0;
-            int i;
-            if (startIndex != 0) FileStream.Seek(startIndex, SeekOrigin.Begin);
-            i = startIndex != 0 ? i = startIndex : i = 0;
-            for (; i < dataLength; i++)
+
+            for (int i = 0; i < arrayLength; i++)
             {
-                if (startIndex == 0) FileStream.Seek(step * i, SeekOrigin.Begin);
+                FileStream.Seek(startIndex + (step * i), SeekOrigin.Begin);
                 FileStream.Read(buff, 0, 2);
-                Y[index] = BitConverter.ToInt16(buff, 0);
-                X[index] = index * step; 
-                index++;
+                Y[i] = BitConverter.ToInt16(buff, 0);
+                X[i] = i * step;
             }
-            return new ReturnValues(X, Y);
+            var finalNumber = startIndex + (step * arrayLength - 1);
+            return new ClassDatas(X, Y, finalNumber);
         }
         #endregion
     }

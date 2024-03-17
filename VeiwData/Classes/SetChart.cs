@@ -3,6 +3,7 @@ using System;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using VeiwData.FFT;
 
 
 namespace VeiwData.Classes
@@ -22,13 +23,15 @@ namespace VeiwData.Classes
             Array.Copy(x, 0, X, 0, x.Length);
             Array.Copy(y, 0, Y, 0, y.Length);
             DrawingAllData();
+            GetFFT fft = new GetFFT(Y,X);
         }
 
         private void DrawingAllData()
         {
-            openForms.sgAllData.Plots[0].PlotXY(X, Y);
-            openForms.sgIntendedData.PlotXY(X, Y);
-            openForms.sgAllData.XAxes[0].Range = new Range(X[0], X[X.Length - 1]);
+            openForms.sgAllData.PlotXY(X, Y);
+            openForms.scatterGraph2.PlotXY(X, Y);
+            openForms.sgAllData.XAxes[0].Range = new Range(1, X.Max());
+            openForms.sgIntendedData.XAxes[0].Range = new Range(1, X.Max());
             openForms.scrollBar = new ScroolBar();
         }
 
@@ -37,7 +40,8 @@ namespace VeiwData.Classes
             switch (perecentIntended)
             {
                 case 8:
-                    openForms.sgAllData.Plots[0].PlotXY(X, Y);
+                    openForms.sgIntendedData.Plots[0].PlotXY(X, Y);
+                    openForms.sgIntendedData.XAxes[0].Range = new Range(1, X.Max());
                     break;
 
                 default:
@@ -52,8 +56,9 @@ namespace VeiwData.Classes
             yDraw = new double[y.Length];
             Array.Copy(x, 0, xDraw, 0, x.Length);
             Array.Copy(y, 0, yDraw, 0, y.Length);
-            openForms.sgIntendedData.Plots[0].YAxis.Range = new Range(y.Min(), y.Max());
-            openForms.sgIntendedData.Plots[0].PlotXY(xDraw, yDraw);
+
+            openForms.scatterGraph2.Plots[0].PlotXY(xDraw, yDraw);
+            //openForms.sgIntendedData.Plots[0].XAxis.Range = new Range(1, x.Max());
         }
     }
 }

@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -20,27 +19,27 @@ namespace VeiwData
         public double IndexSpace { get; set; }
         double xData, yData = 0;
         public int WithScreen { get; set; }
-        public ReturnValues DataIntended { get; set; }
+        public ClassDatas DataIntended { get; set; }
         public int MaximumValueScroll { get; set; }
         public int ValueScroll { get; set; }
         public double ValueZoom { get; set; }
         public int SelectIndexZoom { get; set; }
         public int Start { get; private set; } = 0;
-        public int End { get; private set; } 
+        public int End { get; private set; }
         private int Length { get; set; }
 
         #endregion
 
         #region Model
         Tuple<FileStream, long, string> Result;
-        Dataloading Da;
+        Dataloading DL;
         SetChart setchart;
         List<double> ValuesZoom = new List<double>() { 2.5, 5, 7.5, 10, 20, 30, 50, 70, 100 };
         SetIndexRange SIR = new SetIndexRange();
         public ScroolBar scrollBar;
         Point p;
         DataTable dt;
-        
+
         #endregion
 
         public frmMain()
@@ -49,10 +48,9 @@ namespace VeiwData
             DisplayRange = 2;
             var resolotion = new Resolotion();
             WithScreen = resolotion.Width * 2;
-            cbZoom.SelectedIndex = 6;
+            cbZoom.SelectedIndex = 8;
             ValueZoom = ValuesZoom[cbZoom.SelectedIndex];
             SelectIndexZoom = cbZoom.SelectedIndex;
-            IndexSpace = SIR.GetIndexRange(ValueZoom, WithScreen);
 
         }
 
@@ -92,11 +90,12 @@ namespace VeiwData
             isAccess = true;
             if (isAccess)
             {
+                IndexSpace = SIR.GetIndexRange(ValueZoom, Step);
                 MaximumValueScroll = (int)Result.Item2;
-                Da = new Dataloading(Result.Item1);
+                DL = new Dataloading(Result.Item1);
                 Step = Result.Item2 / (WithScreen * 2);
 
-                var item = Da.GetData(0, WithScreen * 2, Step, WithScreen * 2);
+                var item = DL.GetData(0, Step, WithScreen * 2);
                 setchart = new SetChart(item.ItemX, item.ItemY);
 
                 lblLengthData.Text = Result.Item2.ToString("#,0");
@@ -110,7 +109,7 @@ namespace VeiwData
                 Length = End;
 
                 tvFileName.ExpandAll();
-                SourceDataGrade();
+                SourceDataGride();
 
             }
         }
@@ -159,8 +158,8 @@ namespace VeiwData
                 ValueZoom = ValuesZoom[cbZoom.SelectedIndex];
                 SelectIndexZoom = cbZoom.SelectedIndex;
 
-                IndexSpace = SIR.GetIndexRange(ValueZoom, WithScreen);
-                DataPoint();
+                IndexSpace = SIR.GetIndexRange(ValueZoom, Step);
+                //DataPoint();
             }
         }
 
@@ -187,40 +186,82 @@ namespace VeiwData
         {
             if (SelectIndexZoom != 8)
             {
-                Start = (int)xData - ((int)IndexSpace / 2);
-                End = (int)xData + ((int)IndexSpace / 2);
-
+                Start = (int)xData;
+                End = (int)IndexSpace;
                 Start = Start <= 0 ? 0 : Start;
 
-                lblRangeData.Text = $"{Start} - {End}";
                 lblIndex.Text = xData.ToString();
 
-                Length = End - Start;
-                SourceDataGrade();
-                DataIntended = Da.GetData(Start, End, Step, WithScreen * 2);
-                sgIntendedData.Plots[0].XAxis.Range = new Range(Start, End);
 
+                DataIntended = DL.GetData(Start, End, WithScreen * 2);
+
+                RangePlot();
             }
-            setchart.DrawingIntendedData(DataIntended.ItemX, DataIntended.ItemY, SelectIndexZoom);
+            else
+            {
+                setchart.DrawingIntendedData(DataIntended.ItemX, DataIntended.ItemY, SelectIndexZoom);
+            }
         }
 
-        private void sgIntendedData_InteractionHistoryCountChanged(object sender, EventArgs e)
-        {
-            var range = sgIntendedData.Plots[0].XAxis.Range;
-        }
-
-        private void SourceDataGrade()
+        private void SourceDataGride()
         {
             dt = new DataTable();
             dt.Columns.Add("Begin", typeof(int));
             dt.Columns.Add("End", typeof(int));
-            dt.Columns.Add("Length", typeof(int));
             dt.Columns.Add("LengthFile", typeof(string));
-            dt.Rows.Add(Start, End, Length, Result.Item2.ToString());
+            dt.Rows.Add(Start, Start + SIR.GetIndexRange(ValueZoom, Start), Result.Item2.ToString());
 
             dgSelectSample.DataSource = dt;
             dgSelectSample.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dt.Dispose();
+        }
+
+        private void RangePlot()
+        {
+            switch (ValueZoom)
+            {
+                case 2.5:
+                    sgIntendedData.Plots[0].XAxis.Range = new Range(Start, SetRange(ValueZoom,Start));
+                    break;
+                case 5:
+                    sgIntendedData.Plots[0].XAxis.Range = new Range(Start, SetRange(ValueZoom, Start));
+                    break;
+                case 7.5:
+                    sgIntendedData.Plots[0].XAxis.Range = new Range(Start, SetRange(ValueZoom,Start));
+                    break;
+                case 10:
+                    sgIntendedData.Plots[0].XAxis.Range = new Range(Start, SetRange(ValueZoom,Start));
+                    break;
+                case 20:
+                    sgIntendedData.Plots[0].XAxis.Range = new Range(Start, SetRange(ValueZoom,Start));
+                    break;
+                case 30:
+                    sgIntendedData.Plots[0].XAxis.Range = new Range(Start, SetRange(ValueZoom,Start));
+                    break;
+                case 50:
+                    sgIntendedData.Plots[0].XAxis.Range = new Range(Start, SetRange(ValueZoom,Start));
+                    break;
+                case 70:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private int SetRange(double valueZoom, int start)
+        {
+            var result = start + SIR.GetIndexRange(ValueZoom, start);
+            if (Result.Item2 > result && start + SIR.GetIndexRange(ValueZoom,Result.Item2) < Result.Item2)
+            {
+                setchart.DrawingIntendedData(DataIntended.ItemX, DataIntended.ItemY, SelectIndexZoom);
+                lblRangeData.Text = $"{Start} - {result}";
+                SourceDataGride();
+                return (int)result;
+            }
+            else
+            {
+                return (int)Result.Item2;
+            }
         }
     }
 

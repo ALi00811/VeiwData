@@ -67,9 +67,18 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.btnChoose = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.dgSelectSample = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblSelector = new System.Windows.Forms.Label();
-            this.dgSelectSample = new System.Windows.Forms.DataGridView();
+            this.scatterGraph1 = new NationalInstruments.UI.WindowsForms.ScatterGraph();
+            this.scatterPlot3 = new NationalInstruments.UI.ScatterPlot();
+            this.xAxis1 = new NationalInstruments.UI.XAxis();
+            this.yAxis1 = new NationalInstruments.UI.YAxis();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.scatterGraph2 = new NationalInstruments.UI.WindowsForms.ScatterGraph();
+            this.scatterPlot4 = new NationalInstruments.UI.ScatterPlot();
+            this.xAxis4 = new NationalInstruments.UI.XAxis();
+            this.yAxis4 = new NationalInstruments.UI.YAxis();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -80,8 +89,11 @@
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox6.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgSelectSample)).BeginInit();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scatterGraph1)).BeginInit();
+            this.groupBox7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scatterGraph2)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -92,7 +104,7 @@
             this.btnMenuVeiw});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1828, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1829, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -159,9 +171,9 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblStatusProcessor});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 804);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 868);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1828, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1829, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -178,13 +190,14 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(13, 27);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1810, 657);
+            this.groupBox1.Size = new System.Drawing.Size(1803, 630);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Data";
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.scatterGraph2);
             this.groupBox3.Controls.Add(this.sgIntendedData);
             this.groupBox3.Controls.Add(this.sgAllData);
             this.groupBox3.Controls.Add(this.sbChart);
@@ -192,26 +205,25 @@
             this.groupBox3.Controls.Add(this.groupBox4);
             this.groupBox3.Location = new System.Drawing.Point(290, 18);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1500, 633);
+            this.groupBox3.Size = new System.Drawing.Size(1490, 605);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Chart";
             // 
             // sgIntendedData
             // 
-            this.sgIntendedData.InteractionModeDefault = NationalInstruments.UI.GraphDefaultInteractionMode.PanX;
+            this.sgIntendedData.ImmediateUpdates = true;
             this.sgIntendedData.Location = new System.Drawing.Point(23, 102);
             this.sgIntendedData.Name = "sgIntendedData";
             this.sgIntendedData.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
             this.scatterPlot2});
-            this.sgIntendedData.Size = new System.Drawing.Size(1453, 391);
+            this.sgIntendedData.Size = new System.Drawing.Size(1453, 344);
             this.sgIntendedData.TabIndex = 8;
             this.sgIntendedData.UseColorGenerator = true;
             this.sgIntendedData.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
             this.xAxis2});
             this.sgIntendedData.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
             this.yAxis2});
-            this.sgIntendedData.InteractionHistoryCountChanged += new System.EventHandler(this.sgIntendedData_InteractionHistoryCountChanged);
             // 
             // scatterPlot2
             // 
@@ -220,18 +232,25 @@
             // 
             // xAxis2
             // 
-            this.xAxis2.InteractionMode = NationalInstruments.UI.ScaleInteractionMode.None;
+            this.xAxis2.CaptionForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.xAxis2.EditRangeNumericFormatMode = NationalInstruments.UI.NumericFormatMode.CreateSimpleDoubleMode();
+            this.xAxis2.MinimumHeight = 1;
+            this.xAxis2.MinorDivisions.GridVisible = true;
+            this.xAxis2.MinorDivisions.TickColor = System.Drawing.SystemColors.ButtonFace;
+            this.xAxis2.MinorDivisions.TickVisible = true;
+            this.xAxis2.Mode = NationalInstruments.UI.AxisMode.Fixed;
             this.xAxis2.OriginLineStyle = NationalInstruments.UI.LineStyle.Dot;
+            this.xAxis2.OriginLineVisible = true;
             // 
             // sgAllData
             // 
             this.sgAllData.InteractionMode = ((NationalInstruments.UI.GraphInteractionModes)(((NationalInstruments.UI.GraphInteractionModes.ZoomX | NationalInstruments.UI.GraphInteractionModes.ZoomY) 
             | NationalInstruments.UI.GraphInteractionModes.ZoomAroundPoint)));
-            this.sgAllData.Location = new System.Drawing.Point(23, 492);
+            this.sgAllData.Location = new System.Drawing.Point(22, 452);
             this.sgAllData.Name = "sgAllData";
             this.sgAllData.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
             this.scatterPlot1});
-            this.sgAllData.Size = new System.Drawing.Size(1453, 135);
+            this.sgAllData.Size = new System.Drawing.Size(1453, 147);
             this.sgAllData.TabIndex = 7;
             this.sgAllData.UseColorGenerator = true;
             this.sgAllData.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
@@ -384,7 +403,7 @@
             this.groupBox2.Controls.Add(this.btnChoose);
             this.groupBox2.Location = new System.Drawing.Point(6, 18);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(278, 633);
+            this.groupBox2.Size = new System.Drawing.Size(278, 605);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Open File";
@@ -396,7 +415,7 @@
             this.tvFileName.Location = new System.Drawing.Point(8, 86);
             this.tvFileName.Name = "tvFileName";
             this.tvFileName.ShowNodeToolTips = true;
-            this.tvFileName.Size = new System.Drawing.Size(264, 541);
+            this.tvFileName.Size = new System.Drawing.Size(264, 501);
             this.tvFileName.TabIndex = 3;
             // 
             // btnClear
@@ -425,32 +444,12 @@
             // 
             this.groupBox6.Controls.Add(this.dgSelectSample);
             this.groupBox6.Controls.Add(this.panel1);
-            this.groupBox6.Location = new System.Drawing.Point(13, 690);
+            this.groupBox6.Location = new System.Drawing.Point(13, 663);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(1803, 111);
+            this.groupBox6.Size = new System.Drawing.Size(721, 182);
             this.groupBox6.TabIndex = 3;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Select";
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.panel1.Controls.Add(this.lblSelector);
-            this.panel1.Location = new System.Drawing.Point(602, 12);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(794, 93);
-            this.panel1.TabIndex = 0;
-            // 
-            // lblSelector
-            // 
-            this.lblSelector.AutoSize = true;
-            this.lblSelector.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSelector.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblSelector.Location = new System.Drawing.Point(340, 34);
-            this.lblSelector.Name = "lblSelector";
-            this.lblSelector.Size = new System.Drawing.Size(32, 33);
-            this.lblSelector.TabIndex = 0;
-            this.lblSelector.Text = "0";
             // 
             // dgSelectSample
             // 
@@ -459,18 +458,100 @@
             this.dgSelectSample.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.RaisedVertical;
             this.dgSelectSample.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgSelectSample.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.dgSelectSample.Location = new System.Drawing.Point(1402, 12);
+            this.dgSelectSample.Location = new System.Drawing.Point(290, 17);
             this.dgSelectSample.Name = "dgSelectSample";
             this.dgSelectSample.ReadOnly = true;
             this.dgSelectSample.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dgSelectSample.Size = new System.Drawing.Size(394, 93);
+            this.dgSelectSample.Size = new System.Drawing.Size(421, 159);
             this.dgSelectSample.TabIndex = 1;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.panel1.Controls.Add(this.lblSelector);
+            this.panel1.Location = new System.Drawing.Point(6, 17);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(267, 159);
+            this.panel1.TabIndex = 0;
+            // 
+            // lblSelector
+            // 
+            this.lblSelector.AutoSize = true;
+            this.lblSelector.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSelector.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblSelector.Location = new System.Drawing.Point(54, 60);
+            this.lblSelector.Name = "lblSelector";
+            this.lblSelector.Size = new System.Drawing.Size(32, 33);
+            this.lblSelector.TabIndex = 0;
+            this.lblSelector.Text = "0";
+            // 
+            // scatterGraph1
+            // 
+            this.scatterGraph1.InteractionMode = ((NationalInstruments.UI.GraphInteractionModes)(((NationalInstruments.UI.GraphInteractionModes.ZoomX | NationalInstruments.UI.GraphInteractionModes.ZoomY) 
+            | NationalInstruments.UI.GraphInteractionModes.ZoomAroundPoint)));
+            this.scatterGraph1.Location = new System.Drawing.Point(13, 21);
+            this.scatterGraph1.Name = "scatterGraph1";
+            this.scatterGraph1.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
+            this.scatterPlot3});
+            this.scatterGraph1.Size = new System.Drawing.Size(1053, 157);
+            this.scatterGraph1.TabIndex = 7;
+            this.scatterGraph1.UseColorGenerator = true;
+            this.scatterGraph1.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
+            this.xAxis1});
+            this.scatterGraph1.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
+            this.yAxis1});
+            this.scatterGraph1.PlotAreaMouseUp += new System.Windows.Forms.MouseEventHandler(this.sgAllData_PlotAreaMouseUp);
+            // 
+            // scatterPlot3
+            // 
+            this.scatterPlot3.XAxis = this.xAxis1;
+            this.scatterPlot3.YAxis = this.yAxis1;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.scatterGraph1);
+            this.groupBox7.Location = new System.Drawing.Point(740, 663);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(1076, 182);
+            this.groupBox7.TabIndex = 3;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "FFT";
+            // 
+            // scatterGraph2
+            // 
+            this.scatterGraph2.Border = NationalInstruments.UI.Border.None;
+            this.scatterGraph2.ImmediateUpdates = true;
+            this.scatterGraph2.Location = new System.Drawing.Point(68, 116);
+            this.scatterGraph2.Name = "scatterGraph2";
+            this.scatterGraph2.Plots.AddRange(new NationalInstruments.UI.ScatterPlot[] {
+            this.scatterPlot4});
+            this.scatterGraph2.Size = new System.Drawing.Size(1393, 303);
+            this.scatterGraph2.TabIndex = 8;
+            this.scatterGraph2.XAxes.AddRange(new NationalInstruments.UI.XAxis[] {
+            this.xAxis4});
+            this.scatterGraph2.YAxes.AddRange(new NationalInstruments.UI.YAxis[] {
+            this.yAxis4});
+            // 
+            // scatterPlot4
+            // 
+            this.scatterPlot4.XAxis = this.xAxis4;
+            this.scatterPlot4.YAxis = this.yAxis4;
+            // 
+            // xAxis4
+            // 
+            this.xAxis4.EditRangeNumericFormatMode = NationalInstruments.UI.NumericFormatMode.CreateSimpleDoubleMode();
+            this.xAxis4.Visible = false;
+            // 
+            // yAxis4
+            // 
+            this.yAxis4.Visible = false;
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1828, 826);
+            this.ClientSize = new System.Drawing.Size(1829, 890);
+            this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.statusStrip1);
@@ -493,9 +574,12 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgSelectSample)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgSelectSample)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.scatterGraph1)).EndInit();
+            this.groupBox7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.scatterGraph2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -538,12 +622,21 @@
         private NationalInstruments.UI.ScatterPlot scatterPlot2;
         private NationalInstruments.UI.XAxis xAxis2;
         private NationalInstruments.UI.YAxis yAxis2;
-        public NationalInstruments.UI.WindowsForms.ScatterGraph sgIntendedData;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Panel panel1;
         public System.Windows.Forms.Label lblSelector;
         public System.Windows.Forms.DataGridView dgSelectSample;
         public System.Windows.Forms.ToolStripStatusLabel lblStatusProcessor;
+        public NationalInstruments.UI.WindowsForms.ScatterGraph sgIntendedData;
+        public NationalInstruments.UI.WindowsForms.ScatterGraph scatterGraph1;
+        private NationalInstruments.UI.ScatterPlot scatterPlot3;
+        private NationalInstruments.UI.XAxis xAxis1;
+        private NationalInstruments.UI.YAxis yAxis1;
+        private System.Windows.Forms.GroupBox groupBox7;
+        public NationalInstruments.UI.WindowsForms.ScatterGraph scatterGraph2;
+        private NationalInstruments.UI.ScatterPlot scatterPlot4;
+        private NationalInstruments.UI.XAxis xAxis4;
+        private NationalInstruments.UI.YAxis yAxis4;
     }
 }
 
