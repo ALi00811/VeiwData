@@ -23,7 +23,7 @@ namespace VeiwData.Classes
             Array.Copy(x, 0, X, 0, x.Length);
             Array.Copy(y, 0, Y, 0, y.Length);
             DrawingAllData();
-            GetFFT fft = new GetFFT(Y,X);
+            FFT();
         }
 
         private void DrawingAllData()
@@ -58,7 +58,17 @@ namespace VeiwData.Classes
             Array.Copy(y, 0, yDraw, 0, y.Length);
 
             openForms.scatterGraph2.Plots[0].PlotXY(xDraw, yDraw);
-            //openForms.sgIntendedData.Plots[0].XAxis.Range = new Range(1, x.Max());
+        }
+        private void FFT()
+        {
+            var xx = X.Length % 1024;
+            double[] FX = new double[1024];
+            for (int i = 0; i < FX.Length; i++)
+            {
+                FX[i] = X[xx + i];
+
+            }
+            GetFFT fft = new GetFFT(Y, FX);
         }
     }
 }

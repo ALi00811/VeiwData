@@ -15,7 +15,7 @@ namespace VeiwData
         #region Property
         public int DisplayRange { get; set; }
         public long Step { get; set; }
-        public bool isAccess { get; set; }
+        public bool isAccess { get; set; } = false;
         public double IndexSpace { get; set; }
         double xData, yData = 0;
         public int WithScreen { get; set; }
@@ -87,7 +87,6 @@ namespace VeiwData
         {
             Result = OpenFile.Open();
             if (!isAccess) Clear();
-            isAccess = true;
             if (isAccess)
             {
                 IndexSpace = SIR.GetIndexRange(ValueZoom, Step);
@@ -190,17 +189,10 @@ namespace VeiwData
                 End = (int)IndexSpace;
                 Start = Start <= 0 ? 0 : Start;
 
-                lblIndex.Text = xData.ToString();
-
-
                 DataIntended = DL.GetData(Start, End, WithScreen * 2);
-
                 RangePlot();
             }
-            else
-            {
-                setchart.DrawingIntendedData(DataIntended.ItemX, DataIntended.ItemY, SelectIndexZoom);
-            }
+            
         }
 
         private void SourceDataGride()
@@ -248,14 +240,54 @@ namespace VeiwData
             }
         }
 
+        private void btnMenuFFT_Click(object sender, EventArgs e)
+        {
+            if (gbFFT.Visible)
+            {
+                gbFFT.Visible = false;
+            }
+            else
+            {
+                gbFFT.Visible = true;
+            }
+        }
+
+        private void btnMenuSelect_Click(object sender, EventArgs e)
+        {
+            if (gbSelect.Visible)
+            {
+                gbSelect.Visible = false;
+            }
+            else
+            {
+                gbSelect.Visible = true;
+            }
+        }
+
+        private void btnMenuData_Click(object sender, EventArgs e)
+        {
+            if (gbData.Visible)
+            {
+                gbData.Visible = false;
+            }
+            else
+            {
+                gbData.Visible = true;
+            }
+        }
+
         private int SetRange(double valueZoom, int start)
         {
             var result = start + SIR.GetIndexRange(ValueZoom, start);
             if (Result.Item2 > result && start + SIR.GetIndexRange(ValueZoom,Result.Item2) < Result.Item2)
             {
                 setchart.DrawingIntendedData(DataIntended.ItemX, DataIntended.ItemY, SelectIndexZoom);
+                
                 lblRangeData.Text = $"{Start} - {result}";
+                lblIndex.Text = xData.ToString();
+
                 SourceDataGride();
+
                 return (int)result;
             }
             else

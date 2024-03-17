@@ -33,11 +33,6 @@ namespace VeiwData.FFT
             }
         }
 
-        private void PlotIQ(double[] data, double[] XLabelFrequency)
-        {
-            
-        }
-
         private void CalculateFFTFunction(ComplexDouble[] waveform, double[] XLabelFrequency)
         {
             try
@@ -63,9 +58,7 @@ namespace VeiwData.FFT
         {
             try
             {
-
                 openForms.scatterGraph1.PlotXY(xData, yData);
-
             }
             catch (Exception ex)
             {

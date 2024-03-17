@@ -27,6 +27,7 @@ namespace VeiwData
                     FileLength = new FileInfo(ofd.FileName).Length;
                     FileName = ofd.FileName;
                     stopwatch.Stop();
+                    OpenForms.isAccess = true;
                 }
             }
             OpenForms.lblStatusProcessor.Text = $"Opened in {stopwatch.Elapsed} Secend";
